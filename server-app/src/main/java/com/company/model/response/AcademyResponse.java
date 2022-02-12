@@ -14,6 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AcademyResponse {
-    private AcademyDto academyDto;
-    private List<ClassDto> classDtoList;
+    private AcademyDto academy;
+    private List<ClassDto> classList;
 }

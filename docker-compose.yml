@@ -1,0 +1,19 @@
+version: "3.3"
+
+services:
+  app:
+    container_name: springboot-postgres
+    image: springboot-postgres
+    build: ./
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresdb
+  postgresdb:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=qwerty
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=project_review

@@ -1,16 +1,11 @@
 package com.company.service;
 
 import com.company.model.dto.AcademyDto;
-import com.company.model.dto.CategoryDto;
 import com.company.model.dto.ClassDto;
-import com.company.model.dto.SectionDto;
 import com.company.model.response.AcademyResponse;
-import com.company.model.response.SectionResponse;
 import com.company.persistence.entity.AcademyEntity;
 import com.company.persistence.entity.CategoryEntity;
 import com.company.persistence.entity.ClassEntity;
-import com.company.persistence.entity.SectionEntity;
-import com.company.persistence.repository.AcademyRepository;
 import com.company.persistence.repository.CategoryRepository;
 import com.company.persistence.repository.ClassRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +13,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -27,7 +21,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AcademyService {
 
-    private final AcademyRepository academyRepository;
     private final CategoryRepository categoryRepository;
     private final ClassRepository classRepository;
     private final ModelMapper mapper;
@@ -61,8 +54,8 @@ public class AcademyService {
                 .collect(Collectors.toList());
 
         return AcademyResponse.builder()
-                .academyDto(academyDto)
-                .classDtoList(classDtoList)
+                .academy(academyDto)
+                .classList(classDtoList)
                 .build();
     }
 

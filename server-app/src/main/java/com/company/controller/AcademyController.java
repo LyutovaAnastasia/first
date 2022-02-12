@@ -1,9 +1,6 @@
 package com.company.controller;
 
-import com.company.model.dto.AcademyDto;
 import com.company.model.response.AcademyResponse;
-import com.company.model.response.SectionResponse;
-import com.company.persistence.entity.AcademyEntity;
 import com.company.service.AcademyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

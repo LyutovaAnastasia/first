@@ -19,9 +19,11 @@ public class MapperConfig {
                 .setSkipNullEnabled(true)
                 .setFieldAccessLevel(org.modelmapper.config.Configuration.AccessLevel.PRIVATE);
 //        mapper
-//                .typeMap(OrderEntity.class, OrderDto.class)
-//                .addMappings(m -> m.map(OrderEntity::getOrderId, OrderDto::setOrderId))
-//                .addMappings(m -> m.map(OrderEntity::getOrderDate, OrderDto::setOrderDate))
+//                .typeMap(AcademyEntity.class, AcademyDto.class)
+//                .addMappings(m -> m.map(AcademyEntity::getId, AcademyDto::setId))
+//                .addMappings(m -> m.map(AcademyEntity::getName, AcademyDto::setName))
+//                .addMappings(m -> m.map(AcademyEntity::getLinkTag, AcademyDto::setLinkTag))
+//                .addMappings(m -> m.map(AcademyEntity::getIconTag, AcademyDto::setIconTag));
 //                .addMappings(m -> m.map(source -> source.getEmployee().getId(), OrderDto::setEmployeeId))
 //                .addMappings(m -> m.map(source -> source.getClient().getId(), OrderDto::setClientId))
 //                .addMappings(m -> m.map(source -> source.getItem().getItemId(), OrderDto::setItemId))
