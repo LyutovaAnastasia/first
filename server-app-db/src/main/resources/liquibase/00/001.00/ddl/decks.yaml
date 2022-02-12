@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: 00.001.00/ddl/decks
+      author: RenEstel
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                schemaName: notion
+                tableName: decks
+      changes:
+        - tagDatabase:
+            tag: release/00.001.00
+
+        - createSequence:
+            schemaName: notion
+            sequenceName: decks_seq
+            startValue: 1
+
+        - createTable:
+            schemaName: notion
+            remarks: 'the table stores address for notion delivery'
+            tableName: decks
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: decks_pk
+                  remarks: 'the id is a primary key of the table, it relations decks_seq'
+                  name: id
+                  type: bigint
+              - column:
+                  remarks: 'the name of the deck'
+                  name: name
+                  type: varchar(125)
+
+        - addDefaultValue:
+            schemaName: notion
+            tableName: decks
+            columnName: id
+            defaultValueSequenceNext: decks_seq

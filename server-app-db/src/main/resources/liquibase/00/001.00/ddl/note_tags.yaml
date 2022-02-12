@@ -1,0 +1,56 @@
+databaseChangeLog:
+  - changeSet:
+      id: 00.001.00/ddl/note_tags
+      author: RenEstel
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                schemaName: notion
+                tableName: note_tags
+      changes:
+        - tagDatabase:
+            tag: release/00.001.00
+        - createSequence:
+            schemaName: notion
+            sequenceName: note_tags_seq
+            startValue: 1
+        - createTable:
+            schemaName: notion
+            tableName: note_tags
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: note_tags_pk
+                  remarks: 'the id is a primary key of the table, it relations note_tags_seq'
+                  name: id
+                  type: bigint
+              - column:
+                  remarks: 'note id'
+                  name: note_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_note_tags_note
+                    references: notion.notes(id)
+              - column:
+                  remarks: 'tag id'
+                  name: tag_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_note_tags_tag
+                    references: notion.tags(id)
+        - addDefaultValue:
+            schemaName: notion
+            tableName: note_tags
+            columnName: id
+            defaultValueSequenceNext: note_tags_seq
+      rollback:
+        - dropSequence:
+            schemaName: notion
+            sequenceName: note_tags_seq
+        - dropTable:
+            schemaName: notion
+            tableName: note_tags

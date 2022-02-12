@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: 00.001.00/ddl/sections
+      author: LyutovaAnastasia
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                schemaName: server
+                tableName: sections
+      changes:
+        - tagDatabase:
+            tag: release/00.001.00
+
+        - createSequence:
+            schemaName: server
+            sequenceName: section_seq
+            startValue: 1
+
+        - createTable:
+            schemaName: server
+            remarks: 'таблица секций направлений it курсов'
+            tableName: sections
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: section_pk
+                  remarks: 'первичный ключ'
+                  name: id
+                  type: bigint
+              - column:
+                  remarks: 'name of the section'
+                  name: name
+                  type: varchar(125)
+
+        - addDefaultValue:
+            schemaName: server
+            tableName: sections
+            columnName: id
+            defaultValueSequenceNext: section_seq
