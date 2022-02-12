@@ -1,10 +1,15 @@
 package com.company.config;
 
+import com.company.model.dto.AcademyDto;
+import com.company.persistence.entity.AcademyEntity;
 import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MapperConfigTest {
     @InjectMocks
@@ -36,10 +41,10 @@ class MapperConfigTest {
 //        var from = generator.nextObject(AcademyEntity.class);
 //        var to = mapper.map(from, AcademyDto.class);
 //
-//        Assertions.assertEquals(from.getId(), to.getId());
-//        Assertions.assertEquals(from.getName(), to.getName());
-//        Assertions.assertEquals(from.getLinkTag(), to.getLinkTag());
-//        Assertions.assertEquals(from.getIconTag(), to.getIconTag());
+//        assertEquals(from.getId(), to.getId());
+//        assertEquals(from.getName(), to.getName());
+//        assertEquals(from.getLinkTag(), to.getLinkTag());
+//        assertEquals(from.getIconTag(), to.getIconTag());
 //    }
 //
 //    @Test

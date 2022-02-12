@@ -10,3 +10,7 @@ drop:
 	docker rm -f $$(docker ps -qa); docker volume rm $$(docker volume ls -q);
 init:
 	export PGPASSWORD=qwerty && psql -h localhost -p 5432 -U postgres -w -f utils/init.sql
+deploy:
+	scp server-app/target/server-app-00.001.00-SNAPSHOT.jar root@81.163.28.113:./
+run:
+	nohup java -jar server-app-00.001.00-SNAPSHOT.jar

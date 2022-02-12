@@ -1,6 +1,14 @@
 spring:
   datasource:
-    url: jdbc:postgresql://81.163.28.113:5432/postgres
+    url: jdbc:postgresql://81.163.28.113:5432/postgres?currentSchema=server
     username: postgres
     password: qwerty
     driver-class-name: org.postgresql.Driver
+    hikari:
+      pool-name: HikariPool
+      max-lifetime: 600000
+      connection-timeout: 15000
+      maximum-pool-size: 2
+      idle-timeout: 200000
+      minimum-idle: 1
+      schema: server
