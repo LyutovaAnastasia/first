@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      id: 00.001.00/ddl/categories_academies
+      author: LyutovaAnastasia
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                schemaName: server
+                tableName: categories_academies
+      changes:
+        - tagDatabase:
+            tag: release/00.001.00
+        - createSequence:
+            schemaName: server
+            sequenceName: categories_academies_seq
+            startValue: 1
+        - createTable:
+            schemaName: server
+            tableName: categories_academies
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: categories_academies_pk
+                  name: id
+                  type: bigint
+              - column:
+                  remarks: 'categories id'
+                  name: categories_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_categories_academies_category
+                    references: server.categories(id)
+              - column:
+                  remarks: 'academies id'
+                  name: academies_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_categories_academies_academy
+                    references: server.academies(id)
+        - addDefaultValue:
+            schemaName: server
+            tableName: categories_academies
+            columnName: id
+            defaultValueSequenceNext: categories_academies_seq
+      rollback:
+        - dropSequence:
+            schemaName: server
+            sequenceName: categories_academies_seq
+        - dropTable:
+            schemaName: server
+            tableName: categories_academies

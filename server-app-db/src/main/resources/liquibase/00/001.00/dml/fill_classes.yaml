@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: 01.001.00/dml/fill_classes
+      author: LyutovaAnastasia
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            schemaName: server
+            tableName: classes
+        - sqlCheck:
+            - expectedResult: 0
+            - sql: select count(1) from server.classes
+
+      changes:
+        - tagDatabase:
+            tag: release/01.001.00
+
+        - sql:
+            sql:
+              insert into server.classes (id, name, term, price, academy_id, rating, category_id) values (1, 'name1', 0, 0, 1, 0, 4);
+              insert into server.classes (id, name, term, price, academy_id, rating, category_id) values (2, 'name2', 0, 0, 2, 0, 4);
+              insert into server.classes (id, name, term, price, academy_id, rating, category_id) values (3, 'name3', 0, 0, 3, 0, 5);
+              insert into server.classes (id, name, term, price, academy_id, rating, category_id) values (4, 'name4', 0, 0, 1, 0, 4);
+            endDelimiter: ;
+
+        - rollback:
+            sql: delete from server.classes
+            endDelimiter: ;

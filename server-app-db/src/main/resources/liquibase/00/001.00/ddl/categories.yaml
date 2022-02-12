@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      id: 00.001.00/ddl/categories
+      author: LyutovaAnastasia
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                schemaName: server
+                tableName: categories
+      changes:
+        - tagDatabase:
+            tag: release/00.001.00
+
+        - createSequence:
+            schemaName: server
+            sequenceName: category_seq
+            startValue: 1
+
+        - createTable:
+            schemaName: server
+            tableName: categories
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: category_pk
+                  name: id
+                  type: bigint
+              - column:
+                  name: name
+                  type: varchar(125)
+              - column:
+                  name: count_of_classes
+                  type: smallint
+              - column:
+                  name: section_id
+                  type: bigint
+                  constraints:
+                      nullable: false
+                      foreignKeyName: fk_categories_sections
+                      references: server.sections(id)
+
+        - addDefaultValue:
+            schemaName: server
+            tableName: categories
+            columnName: id
+            defaultValueSequenceNext: category_seq

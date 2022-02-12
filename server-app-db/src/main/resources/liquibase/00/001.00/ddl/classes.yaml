@@ -1,0 +1,62 @@
+databaseChangeLog:
+  - changeSet:
+      id: 00.001.00/ddl/classes
+      author: LyutovaAnastasia
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                schemaName: server
+                tableName: classes
+      changes:
+        - tagDatabase:
+            tag: release/00.001.00
+
+        - createSequence:
+            schemaName: server
+            sequenceName: class_seq
+            startValue: 1
+
+        - createTable:
+            schemaName: server
+            tableName: classes
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: class_pk
+                  name: id
+                  type: bigint
+              - column:
+                  name: name
+                  type: varchar(225)
+              - column:
+                  name: term
+                  type: smallint
+              - column:
+                  name: price
+                  type: smallint
+              - column:
+                  name: rating
+                  type: smallint
+              - column:
+                  name: academy_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_classes_academies
+                    references: server.academies(id)
+              - column:
+                  name: category_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_classes_categories
+                    references: server.categories(id)
+
+
+        - addDefaultValue:
+            schemaName: server
+            tableName: classes
+            columnName: id
+            defaultValueSequenceNext: class_seq

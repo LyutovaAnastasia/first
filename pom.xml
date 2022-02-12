@@ -26,6 +26,7 @@
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <revision>${project.version}</revision>
+    <postgresql.version>42.3.1</postgresql.version>
   </properties>
 
   <modules>
@@ -43,7 +44,7 @@
       <dependency>
         <groupId>org.postgresql</groupId>
         <artifactId>postgresql</artifactId>
-        <version>42.3.1</version>
+        <version>${postgresql.version}</version>
       </dependency>
       <dependency>
         <groupId>org.jeasy</groupId>
@@ -192,6 +193,28 @@
             <outputFileName>openapi.yaml</outputFileName>
             <outputDir>src/main/java</outputDir>
           </configuration>
+        </plugin>
+<!--        <dependencies>-->
+<!--          <dependency>-->
+<!--            <groupId>org.postgresql</groupId>-->
+<!--            <artifactId>postgresql</artifactId>-->
+<!--            <version>${postgresql.version}</version>-->
+<!--          </dependency>-->
+<!--        </dependencies>-->
+        <plugin>
+          <groupId>org.liquibase</groupId>
+          <artifactId>liquibase-maven-plugin</artifactId>
+          <version>4.4.3</version>
+          <configuration>
+            <skip>true</skip>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.postgresql</groupId>
+              <artifactId>postgresql</artifactId>
+              <version>${postgresql.version}</version>
+            </dependency>
+          </dependencies>
         </plugin>
       </plugins>
     </pluginManagement>

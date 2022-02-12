@@ -6,15 +6,32 @@ databaseChangeLog:
   - include:
       file: ddl/sections.yaml
       relativeToChangelogFile: true
-#  - include:
-#      file: ddl/decks.yaml
-#      relativeToChangelogFile: true
-#  - include:
-#      file: ddl/notes.yaml
-#      relativeToChangelogFile: true
-#  - include:
-#      file: ddl/note_tags.yaml
-#      relativeToChangelogFile: true
-#  - include:
-#      file: ddl/sections.yaml
-#      relativeToChangelogFile: true
+  - include:
+      file: ddl/categories.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: ddl/academies.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: ddl/categories_academies.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: ddl/classes.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: dml/fill_sections.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: dml/fill_categories.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: dml/fill_academies.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: dml/fill_categories_academies.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: dml/fill_classes.yaml
+      relativeToChangelogFile: true
+

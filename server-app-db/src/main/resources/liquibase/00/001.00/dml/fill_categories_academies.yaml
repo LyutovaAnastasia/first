@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: 01.001.00/dml/fill_categories_academies
+      author: LyutovaAnastasia
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            schemaName: server
+            tableName: categories_academies
+        - sqlCheck:
+            - expectedResult: 0
+            - sql: select count(1) from server.categories_academies
+
+      changes:
+        - tagDatabase:
+            tag: release/01.001.00
+
+        - sql:
+            sql:
+              insert into server.categories_academies (id, categories_id, academies_id) values (1, 4, 1);
+              insert into server.categories_academies (id, categories_id, academies_id) values (2, 4, 2);
+              insert into server.categories_academies (id, categories_id, academies_id) values (3, 5, 3);
+            endDelimiter: ;
+
+        - rollback:
+            sql: delete from server.categories_academies
+            endDelimiter: ;

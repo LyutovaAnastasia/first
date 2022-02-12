@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: 01.001.00/dml/fill_academies
+      author: LyutovaAnastasia
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            schemaName: server
+            tableName: academies
+        - sqlCheck:
+            - expectedResult: 0
+            - sql: select count(1) from server.academies
+
+      changes:
+        - tagDatabase:
+            tag: release/01.001.00
+
+        - sql:
+            sql:
+              insert into server.academies (id, name, link_tag, icon_tag) values (3, 'Udemy', 'link', 'tag');
+              insert into server.academies (id, name, link_tag, icon_tag) values (2, 'GeekBrains', 'link', 'tag');
+              insert into server.academies (id, name, link_tag, icon_tag) values (1, 'SkillBox', 'link', 'tag');
+            endDelimiter: ;
+
+        - rollback:
+            sql: delete from server.academies
+            endDelimiter: ;
