@@ -30,17 +30,18 @@ public class AcademyService {
     }
 
     public List<AcademyResponse> findCategoryById(Long id) {
-        CategoryEntity categoryEntity = categoryRepository.findById(id).orElseThrow(
-                ()->new RuntimeException("category not found"));
-        Set<AcademyEntity> academyEntitySet = categoryEntity.getAcademyEntitySet();
-
-        List<AcademyResponse> academyResponseList = new ArrayList<>();
-
-        for (AcademyEntity academyEntity : academyEntitySet) {
-            academyResponseList.add(getAcademyResponse(academyEntity, id));
-        }
-
-        return academyResponseList;
+        return null;
+//        CategoryEntity categoryEntity = categoryRepository.findById(id).orElseThrow(
+//                ()->new RuntimeException("category not found"));
+//        Set<AcademyEntity> academyEntitySet = categoryEntity.getAcademyEntitySet();
+//
+//        List<AcademyResponse> academyResponseList = new ArrayList<>();
+//
+//        for (AcademyEntity academyEntity : academyEntitySet) {
+//            academyResponseList.add(getAcademyResponse(academyEntity, id));
+//        }
+//
+//        return academyResponseList;
     }
 
     public AcademyResponse getAcademyResponse(AcademyEntity academyEntity, Long categoryId){

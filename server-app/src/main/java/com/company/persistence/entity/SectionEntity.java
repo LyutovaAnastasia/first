@@ -17,13 +17,13 @@ import java.util.List;
 public class SectionEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sectionsSeqGenerator")
+    @SequenceGenerator(name = "sectionsSeqGenerator", sequenceName = "section_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "section")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "section")
     private List<CategoryEntity> categories;
 }

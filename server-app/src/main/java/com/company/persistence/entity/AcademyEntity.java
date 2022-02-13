@@ -1,8 +1,19 @@
 package com.company.persistence.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import java.util.List;
 import java.util.Set;
 
@@ -12,14 +23,17 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "academies")
-@ToString(exclude = "categoryEntitySet")
-@EqualsAndHashCode(exclude = "categoryEntitySet")
+//@ToString(exclude = "categoryEntitySet")
+//@EqualsAndHashCode(exclude = "categoryEntitySet")
 //@ToString(of = {"orderId"})
 public class AcademyEntity {
 
+    //    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "id")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "academiesSeqGenerator")
+    @SequenceGenerator(name = "academiesSeqGenerator", sequenceName = "academy_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "name")
