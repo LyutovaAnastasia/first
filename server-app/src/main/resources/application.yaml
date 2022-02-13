@@ -1,6 +1,7 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=server
+    #url: jdbc:postgresql://localhost:5432/postgres?currentSchema=server
+    url: jdbc:postgresql://81.163.28.113:5432/postgres?currentSchema=server
     username: postgres
     password: qwerty
     driver-class-name: org.postgresql.Driver

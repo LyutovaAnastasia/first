@@ -1,9 +1,6 @@
 package com.company.persistence.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,14 +18,15 @@ import javax.persistence.Table;
 import java.util.List;
 import java.util.Set;
 
-//@ToString(exclude = "academyEntitySet")
-//@EqualsAndHashCode(exclude = "academyEntitySet")
+
 @Data
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "categories")
+@ToString(of = "id")
+@EqualsAndHashCode(of = "id")
 public class CategoryEntity {
     //
 //    @Id
