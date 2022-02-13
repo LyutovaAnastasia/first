@@ -1,9 +1,6 @@
 package com.company.persistence.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,11 +10,13 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "classes")
+@ToString(of = "id")
+@EqualsAndHashCode(of = "id")
 public class ClassEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "classSeqGenerator")
+    @SequenceGenerator(name = "classSeqGenerator", sequenceName = "class_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "name")
@@ -29,14 +28,14 @@ public class ClassEntity {
     @Column(name = "price")
     private Integer price;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "academy_id")
     private AcademyEntity academy;
-
-    @ManyToOne(optional = false)
+//
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
-
-    @Column(name = "rating")
-    private Integer rating;
+//
+//    @Column(name = "rating")
+//    private Integer rating;
 }

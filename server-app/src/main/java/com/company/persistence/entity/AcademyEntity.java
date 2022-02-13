@@ -2,7 +2,16 @@ package com.company.persistence.entity;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import java.util.List;
 import java.util.Set;
 
@@ -12,14 +21,19 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "academies")
-@ToString(exclude = "categoryEntitySet")
-@EqualsAndHashCode(exclude = "categoryEntitySet")
+@ToString(of = "id")
+@EqualsAndHashCode(of = "id")
+//@ToString(exclude = "categoryEntitySet")
+//@EqualsAndHashCode(exclude = "categoryEntitySet")
 //@ToString(of = {"orderId"})
 public class AcademyEntity {
 
+    //    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "id")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "academiesSeqGenerator")
+    @SequenceGenerator(name = "academiesSeqGenerator", sequenceName = "academy_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "name")
@@ -31,9 +45,9 @@ public class AcademyEntity {
     @Column(name = "icon_tag")
     private String iconTag;
 
-    @OneToMany(mappedBy = "academy")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "academy")
     private List<ClassEntity> classes;
 
-    @ManyToMany(mappedBy = "academyEntitySet")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "academyEntitySet")
     private Set<CategoryEntity> categoryEntitySet;
 }
