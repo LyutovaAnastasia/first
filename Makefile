@@ -14,3 +14,6 @@ deploy:
 	scp server-app/target/server-app-00.001.00-SNAPSHOT.jar root@81.163.28.113:./
 run:
 	nohup java -jar server-app-00.001.00-SNAPSHOT.jar
+docker:
+	docker -v
+
