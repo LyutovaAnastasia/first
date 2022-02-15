@@ -1,7 +1,7 @@
-package com.company.model.response;
+package com.company.domain.model.response;
 
-import com.company.model.dto.AcademyDto;
-import com.company.model.dto.ClassDto;
+import com.company.domain.model.dto.AcademyDto;
+import com.company.domain.model.dto.ClassDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

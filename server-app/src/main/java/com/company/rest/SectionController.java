@@ -1,11 +1,14 @@
-package com.company.controller;
+package com.company.rest;
 
-import com.company.model.response.SectionResponse;
-import com.company.service.*;
+import com.company.domain.model.response.SectionResponse;
+import com.company.domain.service.SectionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -24,7 +27,7 @@ public class SectionController {
         return ResponseEntity.ok(sectionService.findCategoriesById(id));
     }
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<SectionResponse>> findCategories() {
         return ResponseEntity.ok(sectionService.findCategories());
     }

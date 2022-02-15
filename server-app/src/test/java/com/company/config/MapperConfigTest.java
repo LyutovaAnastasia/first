@@ -1,7 +1,7 @@
 package com.company.config;
 
-import com.company.model.dto.AcademyDto;
-import com.company.model.dto.SectionDto;
+import com.company.domain.model.dto.AcademyDto;
+import com.company.domain.model.dto.SectionDto;
 import com.company.persistence.entity.AcademyEntity;
 import com.company.persistence.entity.CategoryEntity;
 import com.company.persistence.entity.ClassEntity;

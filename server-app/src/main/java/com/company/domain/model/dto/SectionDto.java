@@ -1,4 +1,4 @@
-package com.company.model.dto;
+package com.company.domain.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AcademyDto {
-
+public class SectionDto {
     private Long id;
     private String name;
-    private String linkTag;
-    private String iconTag;
 }

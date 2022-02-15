@@ -1,6 +1,6 @@
-package com.company.service;
+package com.company.domain.service;
 
-import com.company.model.dto.CategoryDto;
+import com.company.domain.model.dto.CategoryDto;
 import com.company.persistence.entity.CategoryEntity;
 import com.company.persistence.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;

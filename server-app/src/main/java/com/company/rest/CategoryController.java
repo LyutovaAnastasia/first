@@ -1,7 +1,7 @@
-package com.company.controller;
+package com.company.rest;
 
-import com.company.model.dto.CategoryDto;
-import com.company.service.CategoryService;
+import com.company.domain.model.dto.CategoryDto;
+import com.company.domain.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

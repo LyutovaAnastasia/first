@@ -1,4 +1,4 @@
-package com.company.config;
+package com.company.mapper.config;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

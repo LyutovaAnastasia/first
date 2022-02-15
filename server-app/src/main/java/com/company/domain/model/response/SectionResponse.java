@@ -1,7 +1,7 @@
-package com.company.model.response;
+package com.company.domain.model.response;
 
-import com.company.model.dto.CategoryDto;
-import com.company.model.dto.SectionDto;
+import com.company.domain.model.dto.CategoryDto;
+import com.company.domain.model.dto.SectionDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

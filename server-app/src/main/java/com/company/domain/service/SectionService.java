@@ -1,8 +1,8 @@
-package com.company.service;
+package com.company.domain.service;
 
-import com.company.model.dto.CategoryDto;
-import com.company.model.dto.SectionDto;
-import com.company.model.response.SectionResponse;
+import com.company.domain.model.dto.CategoryDto;
+import com.company.domain.model.dto.SectionDto;
+import com.company.domain.model.response.SectionResponse;
 import com.company.persistence.entity.CategoryEntity;
 import com.company.persistence.entity.SectionEntity;
 import com.company.persistence.repository.SectionRepository;
@@ -42,7 +42,7 @@ public class SectionService {
 
     public SectionResponse findCategoriesById(Long id) {
         SectionEntity sectionEntity = sectionRepository.findById(id).orElseThrow(
-                ()->new RuntimeException("section not found"));
+                () -> new RuntimeException("section not found"));
         return getCategoryResponse(sectionEntity);
     }
 
@@ -50,7 +50,7 @@ public class SectionService {
         var listSectionEntity = sectionRepository.findAll();
         List<SectionResponse> categoryResponseList = new ArrayList<>();
 
-        for(SectionEntity sectionEntity : listSectionEntity) {
+        for (SectionEntity sectionEntity : listSectionEntity) {
             categoryResponseList.add(getCategoryResponse(sectionEntity));
         }
 
