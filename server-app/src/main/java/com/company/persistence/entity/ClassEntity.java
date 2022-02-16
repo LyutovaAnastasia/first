@@ -1,8 +1,21 @@
 package com.company.persistence.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Data
 @Entity
@@ -19,23 +32,19 @@ public class ClassEntity {
     @SequenceGenerator(name = "classSeqGenerator", sequenceName = "class_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "term")
     private Integer term;
 
-    @Column(name = "price")
     private Integer price;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "academy_id")
     private AcademyEntity academy;
-//
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
-//
-//    @Column(name = "rating")
-//    private Integer rating;
+
+    private Integer rating;
 }

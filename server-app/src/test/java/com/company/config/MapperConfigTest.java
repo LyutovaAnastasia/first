@@ -16,16 +16,12 @@ import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class MapperConfigTest {
     @InjectMocks
     ModelMapper mapper;
     private EasyRandom generator;
-
-//    @BeforeAll
-//    public static void init() {
-//        generator = new EasyRandom();
-//    }
 
     @BeforeEach
     public void before() {
@@ -38,6 +34,25 @@ class MapperConfigTest {
     }
 
     @Test
+    void academyEntityToAcademyDto() {
+        var parameters = new EasyRandomParameters();
+        parameters.excludeField(FieldPredicates.named("academy").and(FieldPredicates.inClass(ClassEntity.class)));
+        parameters.excludeField(FieldPredicates.named("category").and(FieldPredicates.inClass(ClassEntity.class)));
+        generator = new EasyRandom(parameters);
+
+        var from = generator.nextObject(AcademyEntity.class);
+        var to = mapper.map(from, AcademyDto.class);
+
+        assertEquals(from.getId(), to.getId());
+        assertEquals(from.getName(), to.getName());
+        assertEquals(from.getLinkTag(), to.getLinkTag());
+        assertEquals(from.getIconTag(), to.getIconTag());
+
+        assertNotNull(to.getClasses());
+        assertNotNull(to.getCategories());
+    }
+
+    @Test
     void sectionEntityToSectionDto() {
         var from = generator.nextObject(SectionEntity.class);
         var to = mapper.map(from, SectionDto.class);
@@ -46,16 +61,16 @@ class MapperConfigTest {
         assertEquals(from.getName(), to.getName());
     }
 
-    @Test
-    void academyEntityToAcademyDto() {
-        var from = generator.nextObject(AcademyEntity.class);
-        var to = mapper.map(from, AcademyDto.class);
-
-        assertEquals(from.getId(), to.getId());
-        assertEquals(from.getName(), to.getName());
-        assertEquals(from.getLinkTag(), to.getLinkTag());
-        assertEquals(from.getIconTag(), to.getIconTag());
-    }
+//    @Test
+//    void academyEntityToAcademyDto() {
+//        var from = generator.nextObject(AcademyEntity.class);
+//        var to = mapper.map(from, AcademyDto.class);
+//
+//        assertEquals(from.getId(), to.getId());
+//        assertEquals(from.getName(), to.getName());
+//        assertEquals(from.getLinkTag(), to.getLinkTag());
+//        assertEquals(from.getIconTag(), to.getIconTag());
+//    }
 
     //
     @Test

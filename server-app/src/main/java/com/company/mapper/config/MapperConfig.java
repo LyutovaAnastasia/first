@@ -1,5 +1,7 @@
 package com.company.mapper.config;
 
+import com.company.domain.model.dto.AcademyDto;
+import com.company.persistence.entity.AcademyEntity;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -18,16 +20,15 @@ public class MapperConfig {
                 .setFieldMatchingEnabled(true)
                 .setSkipNullEnabled(true)
                 .setFieldAccessLevel(org.modelmapper.config.Configuration.AccessLevel.PRIVATE);
-//        mapper
-//                .typeMap(AcademyEntity.class, AcademyDto.class)
-//                .addMappings(m -> m.map(AcademyEntity::getId, AcademyDto::setId))
-//                .addMappings(m -> m.map(AcademyEntity::getName, AcademyDto::setName))
-//                .addMappings(m -> m.map(AcademyEntity::getLinkTag, AcademyDto::setLinkTag))
-//                .addMappings(m -> m.map(AcademyEntity::getIconTag, AcademyDto::setIconTag));
-//                .addMappings(m -> m.map(source -> source.getEmployee().getId(), OrderDto::setEmployeeId))
-//                .addMappings(m -> m.map(source -> source.getClient().getId(), OrderDto::setClientId))
-//                .addMappings(m -> m.map(source -> source.getItem().getItemId(), OrderDto::setItemId))
-//                .addMappings(m -> m.map(OrderEntity::getCompletionDate, OrderDto::setCompletionDate));
+
+        mapper
+                .typeMap(AcademyEntity.class, AcademyDto.class)
+                .addMappings(m -> m.map(AcademyEntity::getId, AcademyDto::setId))
+                .addMappings(m -> m.map(AcademyEntity::getName, AcademyDto::setName))
+                .addMappings(m -> m.map(AcademyEntity::getLinkTag, AcademyDto::setLinkTag))
+                .addMappings(m -> m.map(AcademyEntity::getIconTag, AcademyDto::setIconTag))
+                .addMappings(m -> m.map(AcademyEntity::getClasses, AcademyDto::setClasses))
+                .addMappings(m -> m.map(AcademyEntity::getCategories, AcademyDto::setCategories));
 
 //        mapper
 //                .typeMap(GetDatabaseInfoResponse.class, GetDecksProxyResponse.class)
