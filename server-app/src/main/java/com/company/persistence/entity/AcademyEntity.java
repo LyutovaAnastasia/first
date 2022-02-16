@@ -33,16 +33,11 @@ public class AcademyEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "academiesSeqGenerator")
     @SequenceGenerator(name = "academiesSeqGenerator", sequenceName = "academy_seq", allocationSize = 1)
     private Long id;
-
     private String name;
-
     private String linkTag;
-
     private String iconTag;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "academy")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "academy")
     private List<ClassEntity> classes;
-
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "academyEntitySet")
     private Set<CategoryEntity> categories;
 }

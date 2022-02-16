@@ -12,11 +12,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AcademyDto {
-
     private Long id;
     private String name;
     private String linkTag;
     private String iconTag;
-    List<ClassDto> classes;
-    List<CategoryDto> categories;
+    List<Long> classes;
+    List<Long> categories;
 }

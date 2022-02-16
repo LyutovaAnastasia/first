@@ -1,6 +1,7 @@
 package com.company.domain.service;
 
 import com.company.domain.model.dto.AcademyDto;
+import com.company.domain.model.response.AcademyResponse;
 
 import java.util.List;
 

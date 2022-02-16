@@ -2,6 +2,7 @@ package com.company.rest;
 
 import com.company.domain.model.dto.AcademyDto;
 import com.company.domain.service.AcademyService;
+import com.company.persistence.repository.AcademyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +23,14 @@ import java.util.List;
 public class AcademyController {
 
     private final AcademyService academyService;
+    private final AcademyRepository academyRepository;
 
     @GetMapping("/{id}")
     public ResponseEntity<AcademyDto> getAcademy(@PathVariable("id") Long id) {
         return ResponseEntity.ok(academyService.getAcademy(id));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     public ResponseEntity<Long> addAcademy(@RequestBody AcademyDto academyDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(academyService.addAcademy(academyDto));
     }

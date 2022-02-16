@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,8 +20,9 @@ public class AcademyServiceImpl implements AcademyService {
     private final ModelMapper mapper;
 
     @Override
+    @Transactional
     public AcademyDto getAcademy(Long id) {
-        var academy = academyRepository.getById(id);
+        var academy = academyRepository.getAcademy(id);
         var result = mapper.map(academy, AcademyDto.class);
         return result;
     }
