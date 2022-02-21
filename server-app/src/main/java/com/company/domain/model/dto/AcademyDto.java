@@ -17,5 +17,5 @@ public class AcademyDto {
     private String linkTag;
     private String iconTag;
     List<Long> classes;
-    List<Long> categories;
+//    List<Long> categories;
 }

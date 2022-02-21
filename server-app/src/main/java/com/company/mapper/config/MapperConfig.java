@@ -51,9 +51,9 @@ public class MapperConfig {
 
                     var ingredientIds = insertDataLong(src.getClasses());
                     dst.setClasses(ingredientIds);
-
-                    var toppingsIds = insertDataLong(src.getCategories());
-                    dst.setCategories(toppingsIds);
+//
+//                    var toppingsIds = insertDataLong(src.getCategories());
+//                    dst.setCategories(toppingsIds);
 
                     return dst;
                 });
