@@ -42,9 +42,10 @@ public class ClassEntity {
     @JoinColumn(name = "academy_id")
     private AcademyEntity academy;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
-    private CategoryEntity category;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "category_id")
+//    private CategoryEntity category;
+    private Long categoryId;
 
     private Integer rating;
 }

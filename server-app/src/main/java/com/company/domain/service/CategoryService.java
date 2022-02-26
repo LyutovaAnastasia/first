@@ -1,6 +1,7 @@
 package com.company.domain.service;
 
 import com.company.domain.model.dto.CategoryDto;
+import com.company.domain.model.response.CategoryResponse;
 import com.company.persistence.entity.CategoryEntity;
 import com.company.persistence.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -8,17 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 
-@Service
-@RequiredArgsConstructor
-public class CategoryService {
+public interface CategoryService {
 
-    private final CategoryRepository categoryRepository;
-    private final ModelMapper mapper;
+    CategoryDto findCategoryById(Long id);
 
-    public CategoryDto findCategoryById(Long id) {
-        CategoryEntity categoryEntity = categoryRepository.findById(id).orElseThrow(
-                ()->new RuntimeException("category not found"));
-
-        return mapper.map(categoryEntity, CategoryDto.class);
-    }
+    CategoryResponse getCategory(Long id);
 }

@@ -1,7 +1,14 @@
 package com.company.mapper.config;
 
 import com.company.domain.model.dto.AcademyDto;
+import com.company.domain.model.dto.CategoryDto;
+import com.company.domain.model.dto.ClassDto;
+import com.company.domain.model.response.CategoryResponse;
+import com.company.domain.model.response.SectionResponse;
 import com.company.persistence.entity.AcademyEntity;
+import com.company.persistence.entity.CategoryEntity;
+import com.company.persistence.entity.ClassEntity;
+import com.company.persistence.entity.SectionEntity;
 import com.company.persistence.projection.AcademyProjection;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -23,47 +30,88 @@ public class MapperConfig {
     public ModelMapper createMapper() {
         ModelMapper mapper = new ModelMapper();
         mapper
-                .getConfiguration()
-                .setMatchingStrategy(MatchingStrategies.STRICT)
-                .setFieldMatchingEnabled(true)
-                .setSkipNullEnabled(true)
-                .setFieldAccessLevel(org.modelmapper.config.Configuration.AccessLevel.PRIVATE);
-
-//        mapper
-//                .typeMap(AcademyEntity.class, AcademyResponse.class)
-//                .addMappings(m -> m.<Long>map(AcademyEntity::getId, (target, value) -> target.getAcademy().setId(value)))
-//                .addMappings(m -> m.<String>map(AcademyEntity::getName, (target, value) -> target.getAcademy().setName(value)))
-//                .addMappings(m -> m.<String>map(AcademyEntity::getLinkTag, (target, value) -> target.getAcademy().setLinkTag(value)))
-//                .addMappings(m -> m.<String>map(AcademyEntity::getIconTag, (target, value) -> target.getAcademy().setIconTag(value)))
-//
-//        ;
-//                .addMappings(m -> m.<BigDecimal>map(request -> request.getAddress().getCoordinates().getLatitude(), (entity, value) -> entity.getAddress().setLatitude(value)))
+            .getConfiguration()
+            .setMatchingStrategy(MatchingStrategies.STRICT)
+            .setFieldMatchingEnabled(false)
+            .setSkipNullEnabled(true)
+            .setFieldAccessLevel(org.modelmapper.config.Configuration.AccessLevel.PRIVATE);
 
         mapper
-                .typeMap(AcademyProjection.class, AcademyDto.class)
-                .addMappings(m -> m.map(AcademyProjection::getId, AcademyDto::setId))
-                .addMappings(m -> m.map(AcademyProjection::getName, AcademyDto::setName))
-                .addMappings(m -> m.map(AcademyProjection::getLinkTag, AcademyDto::setLinkTag))
-                .addMappings(m -> m.map(AcademyProjection::getIconTag, AcademyDto::setIconTag))
-                .setPostConverter(ctx -> {
-                    var src = ctx.getSource();
-                    var dst = ctx.getDestination();
+            .typeMap(SectionEntity.class, SectionResponse.class)
+            .addMappings(m -> m.<Long>map(SectionEntity::getId, (target, value) -> target.getSection().setId(value)))
+            .addMappings(m -> m.<String>map(SectionEntity::getName, (target, value) -> target.getSection().setName(value)))
+            .addMappings(m -> m.map(SectionEntity::getCategories, SectionResponse::setCategories));
 
-                    var ingredientIds = insertDataLong(src.getClasses());
-                    dst.setClasses(ingredientIds);
+
+        mapper
+            .typeMap(CategoryEntity.class, CategoryResponse.class)
+            .addMappings(m -> m.<Long>map(CategoryEntity::getId, (target, value) -> target.getCategory().setId(value)))
+            .addMappings(m -> m.<String>map(CategoryEntity::getName, (target, value) -> target.getCategory().setName(value)))
+            .addMappings(m -> m.<Integer>map(CategoryEntity::getCountOfClasses, (target, value) -> target.getCategory().setCountOfClasses(value)))
+            .addMappings(m -> m.map(CategoryEntity::getAcademyEntitySet, CategoryResponse::setAcademies))
+            .addMappings(m -> m.map(CategoryEntity::getClasses, CategoryResponse::setClasses))
+            .setPostConverter(ctx -> {
+                var src = ctx.getSource();
+                var dst = ctx.getDestination();
+                return dst;
+            });
+
+        mapper
+            .typeMap(CategoryEntity.class, CategoryDto.class)
+            .addMappings(m -> m.map(CategoryEntity::getId, CategoryDto::setId))
+            .addMappings(m -> m.map(CategoryEntity::getName, CategoryDto::setName))
+            .addMappings(m -> m.map(CategoryEntity::getCountOfClasses, CategoryDto::setCountOfClasses));
+
+
+        mapper
+            .typeMap(ClassEntity.class, ClassDto.class)
+            .addMappings(m -> m.map(ClassEntity::getId, ClassDto::setId))
+            .addMappings(m -> m.map(ClassEntity::getName, ClassDto::setName))
+            .addMappings(m -> m.map(ClassEntity::getTerm, ClassDto::setTerm))
+            .addMappings(m -> m.map(ClassEntity::getPrice, ClassDto::setPrice))
+            .addMappings(m -> m.map(ClassEntity::getRating, ClassDto::setRating));
+
+        mapper
+            .typeMap(AcademyEntity.class, AcademyDto.class)
+            .addMappings(m -> m.map(AcademyEntity::getId, AcademyDto::setId))
+            .addMappings(m -> m.map(AcademyEntity::getName, AcademyDto::setName))
+            .addMappings(m -> m.map(AcademyEntity::getLinkTag, AcademyDto::setLinkTag))
+            .addMappings(m -> m.map(AcademyEntity::getIconTag, AcademyDto::setIconTag))
+            .addMappings(m -> m.skip(AcademyDto::setClasses))
+            .setPostConverter(ctx -> {
+                var src = ctx.getSource();
+                var dst = ctx.getDestination();
+                var classIds = src.getClasses().stream().map(e -> e.getId()).collect(Collectors.toList());
+                dst.setClasses(classIds);
+                return dst;
+            });
+
+
+        mapper
+            .typeMap(AcademyProjection.class, AcademyDto.class)
+            .addMappings(m -> m.map(AcademyProjection::getId, AcademyDto::setId))
+            .addMappings(m -> m.map(AcademyProjection::getName, AcademyDto::setName))
+            .addMappings(m -> m.map(AcademyProjection::getLinkTag, AcademyDto::setLinkTag))
+            .addMappings(m -> m.map(AcademyProjection::getIconTag, AcademyDto::setIconTag))
+            .setPostConverter(ctx -> {
+                var src = ctx.getSource();
+                var dst = ctx.getDestination();
+
+                var ingredientIds = insertDataLong(src.getClasses());
+                dst.setClasses(ingredientIds);
 //
 //                    var toppingsIds = insertDataLong(src.getCategories());
 //                    dst.setCategories(toppingsIds);
 
-                    return dst;
-                });
+                return dst;
+            });
 
-        mapper
-                .typeMap(AcademyEntity.class, AcademyDto.class)
-                .addMappings(m -> m.map(AcademyEntity::getId, AcademyDto::setId))
-                .addMappings(m -> m.map(AcademyEntity::getName, AcademyDto::setName))
-                .addMappings(m -> m.map(AcademyEntity::getLinkTag, AcademyDto::setLinkTag))
-                .addMappings(m -> m.map(AcademyEntity::getIconTag, AcademyDto::setIconTag));
+//        mapper
+//                .typeMap(AcademyEntity.class, AcademyDto.class)
+//                .addMappings(m -> m.map(AcademyEntity::getId, AcademyDto::setId))
+//                .addMappings(m -> m.map(AcademyEntity::getName, AcademyDto::setName))
+//                .addMappings(m -> m.map(AcademyEntity::getLinkTag, AcademyDto::setLinkTag))
+//                .addMappings(m -> m.map(AcademyEntity::getIconTag, AcademyDto::setIconTag));
 //                .addMappings(m -> m.<List<ClassEntity>>map(source -> source.getClasses(), (target, value) -> {
 //                    System.out.println();
 //                    var collect = Optional.ofNullable(value).orElse(Collections.emptyList()).stream().map(e -> e.getId()).collect(Collectors.toList());
@@ -103,8 +151,8 @@ public class MapperConfig {
             return null;
         }
         return Arrays.stream(source.split(","))
-                .filter(Predicate.not("*"::equals))
-                .collect(Collectors.toList());
+            .filter(Predicate.not("*"::equals))
+            .collect(Collectors.toList());
     }
 
     private static List<Long> insertDataLong(String source) {
@@ -112,9 +160,9 @@ public class MapperConfig {
             return null;
         }
         return Arrays.stream(source.split(","))
-                .filter(Predicate.not("*"::equals))
-                .map(Long::parseLong)
-                .collect(Collectors.toList());
+            .filter(Predicate.not("*"::equals))
+            .map(Long::parseLong)
+            .collect(Collectors.toList());
     }
 
 

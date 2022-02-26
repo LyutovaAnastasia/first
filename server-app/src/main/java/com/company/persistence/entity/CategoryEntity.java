@@ -46,7 +46,7 @@ public class CategoryEntity {
 
     private Integer countOfClasses;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "categories_academies",
             joinColumns = @JoinColumn(name = "categories_id"),
             inverseJoinColumns = @JoinColumn(name = "academies_id")
@@ -56,6 +56,6 @@ public class CategoryEntity {
 //    @OneToMany(mappedBy = "category")
 //    private Set<CategoryAcademyEntity> academies;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryId")
     private List<ClassEntity> classes;
 }

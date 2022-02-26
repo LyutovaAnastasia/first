@@ -6,5 +6,4 @@ public interface AcademyProjection {
     String getLinkTag();
     String getIconTag();
     String getClasses();
-    String getCategories();
 }

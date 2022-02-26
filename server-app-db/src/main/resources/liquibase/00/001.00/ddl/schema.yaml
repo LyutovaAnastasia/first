@@ -7,9 +7,9 @@ databaseChangeLog:
             tag: release/00.001.00
 
         - sql:
-            sql: create schema if not exists food
+            sql: create schema if not exists server
             endDelimiter: ;
 
         - rollback:
-            sql: drop schema if exists food cascade
+            sql: drop schema if exists server cascade
             endDelimiter: ;
