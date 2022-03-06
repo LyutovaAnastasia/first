@@ -5,11 +5,10 @@ databaseChangeLog:
       preConditions:
         - onFail: MARK_RAN
         - tableExists:
-            schemaName: server
             tableName: categories_academies
         - sqlCheck:
             - expectedResult: 0
-            - sql: select count(1) from server.categories_academies
+            - sql: select count(1) from categories_academies
 
       changes:
         - tagDatabase:
@@ -17,10 +16,10 @@ databaseChangeLog:
 
         - sql:
             sql:
-              insert into server.categories_academies (id, categories_id, academies_id) values (1, 4, 1);
-              insert into server.categories_academies (id, categories_id, academies_id) values (2, 4, 2);
+              insert into categories_academies (id, categories_id, academies_id) values (1, 4, 1);
+              insert into categories_academies (id, categories_id, academies_id) values (2, 4, 2);
             endDelimiter: ;
 
         - rollback:
-            sql: delete from server.categories_academies
+            sql: delete from categories_academies
             endDelimiter: ;

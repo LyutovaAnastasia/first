@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: 01.001.00/dml/fill_sections
+      author: LyutovaAnastasia
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            tableName: sections
+        - sqlCheck:
+            - expectedResult: 0
+            - sql: select count(1) from sections
+
+      changes:
+        - tagDatabase:
+            tag: release/01.001.00
+
+        - sql:
+            sql:
+              insert into sections (id, name) values (1, 'Игры');
+              insert into sections (id, name) values (2, 'Языки');
+              insert into sections (id, name) values (3, 'Фреймворки');
+              insert into sections (id, name) values (4, 'Направления');
+            endDelimiter: ;
+
+        - rollback:
+            sql: delete from sections
+            endDelimiter: ;

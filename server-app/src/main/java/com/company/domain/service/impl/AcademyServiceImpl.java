@@ -3,13 +3,18 @@ package com.company.domain.service.impl;
 import com.company.domain.model.dto.AcademyDto;
 import com.company.domain.service.AcademyService;
 import com.company.persistence.entity.AcademyEntity;
+import com.company.persistence.projection.AcademyProjection;
 import com.company.persistence.repository.AcademyRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,9 +27,16 @@ public class AcademyServiceImpl implements AcademyService {
     @Override
     @Transactional
     public AcademyDto getAcademy(Long id) {
-        var academy = academyRepository.getAcademy(id);
+        var academy = academyRepository.getAcademyById(id);
         var result = mapper.map(academy, AcademyDto.class);
         return result;
+    }
+
+    @Override
+    public List<AcademyDto> getAll() {
+        return academyRepository.findAll().stream()
+            .map(e -> mapper.map(e, AcademyDto.class))
+            .collect(Collectors.toList());
     }
 
     @Override
@@ -46,10 +58,13 @@ public class AcademyServiceImpl implements AcademyService {
     }
 
     @Override
-    public List<AcademyDto> getAll() {
-        return academyRepository.findAll().stream()
-                .map(e -> mapper.map(e, AcademyDto.class))
-                .collect(Collectors.toList());
+    @Transactional
+    public Page<AcademyDto> getAllPage(Long id, Pageable pageable) {
+         Page<AcademyProjection> page = academyRepository.getAcademiesByCategoryId(id, pageable);
+         return new PageImpl<AcademyDto>(page.getContent()
+             .stream()
+             .map(e -> mapper.map(e, AcademyDto.class)).collect(Collectors.toList()), pageable, page.getTotalElements());
+
     }
 
 //    public <D, T> D map(T entity, Class<D> outClass) {
@@ -88,25 +103,3 @@ public class AcademyServiceImpl implements AcademyService {
 
 
 }
-
-//
-//    public SectionResponse getCategoryResponse(SectionEntity sectionEntity) {
-//        List<CategoryEntity> categoryEntityList = sectionEntity.getCategories();
-//
-//        SectionDto sectionDto = mapper.map(sectionEntity, SectionDto.class);
-//
-//        List<CategoryDto> categoryDtoList = categoryEntityList.stream()
-//                .map(entity -> map(entity, CategoryDto.class))
-//                .collect(Collectors.toList());
-//
-//        return SectionResponse.builder()
-//                .section(sectionDto)
-//                .categories(categoryDtoList)
-//                .build();
-//    }
-//
-//    public SectionResponse findCategoriesById(Long id) {
-//        SectionEntity sectionEntity = sectionRepository.findById(id).orElseThrow(
-//                ()->new RuntimeException("section not found"));
-//        return getCategoryResponse(sectionEntity);
-//    }

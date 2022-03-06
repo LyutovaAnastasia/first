@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -16,6 +17,6 @@ import java.util.List;
 @AllArgsConstructor
 public class CategoryResponse {
     private CategoryDto category;
-    private List<AcademyDto> academies; // проекция
-    private List<ClassDto> classes;
+//    private List<AcademyDto> academies; // проекция
+    private Set<ClassDto> classes;
 }

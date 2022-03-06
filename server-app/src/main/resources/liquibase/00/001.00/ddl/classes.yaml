@@ -6,19 +6,16 @@ databaseChangeLog:
         - onFail: MARK_RAN
         - not:
             - tableExists:
-                schemaName: server
                 tableName: classes
       changes:
         - tagDatabase:
             tag: release/00.001.00
 
         - createSequence:
-            schemaName: server
             sequenceName: class_seq
             startValue: 1
 
         - createTable:
-            schemaName: server
             tableName: classes
             columns:
               - column:
@@ -45,18 +42,17 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     foreignKeyName: fk_classes_academies
-                    references: server.academies(id)
+                    references: academies(id)
               - column:
                   name: category_id
                   type: bigint
                   constraints:
                     nullable: false
                     foreignKeyName: fk_classes_categories
-                    references: server.categories(id)
+                    references: categories(id)
 
 
         - addDefaultValue:
-            schemaName: server
             tableName: classes
             columnName: id
             defaultValueSequenceNext: class_seq

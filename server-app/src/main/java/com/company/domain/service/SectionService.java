@@ -16,11 +16,11 @@ import java.util.stream.Collectors;
 
 public interface SectionService {
 
-    <D, T> D map(T entity, Class<D> outClass);
+//    <D, T> D map(T entity, Class<D> outClass);
+//
+//    SectionResponse getCategoryResponse(SectionEntity sectionEntity);
 
-    SectionResponse getCategoryResponse(SectionEntity sectionEntity);
-
-    SectionResponse findCategoriesById(Long id);
+    SectionResponse getSection(Long id);
 
     List<SectionResponse> getAll();
 }

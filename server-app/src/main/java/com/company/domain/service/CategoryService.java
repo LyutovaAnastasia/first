@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 public interface CategoryService {
 
-    CategoryDto findCategoryById(Long id);
+//    CategoryDto findCategoryById(Long id);
 
     CategoryResponse getCategory(Long id);
 }

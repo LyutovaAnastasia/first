@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -16,6 +17,6 @@ public class AcademyDto {
     private String name;
     private String linkTag;
     private String iconTag;
-    private List<Long> classes;
+    private Set<Long> classes;
 //    List<Long> categories;
 }

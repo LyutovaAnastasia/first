@@ -11,9 +11,17 @@ services:
       - postgresdb
   postgresdb:
     image: postgres
+    build: ./utils/
     ports:
       - "5432:5432"
     environment:
+      - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=qwerty
       - POSTGRES_USER=postgres
-      - POSTGRES_DB=project_review
+    volumes:
+        - ./docker-entrypoint-initdb.d/10-init.sql
+        - postgres_data:/var/lib/postgresql/data/
+
+
+volumes:
+    postgres_data:

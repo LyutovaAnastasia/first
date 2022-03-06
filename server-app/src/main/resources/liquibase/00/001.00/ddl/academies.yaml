@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: 00.001.00/ddl/academies
+      author: LyutovaAnastasia
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: academies
+      changes:
+        - tagDatabase:
+            tag: release/00.001.00
+
+        - createSequence:
+            sequenceName: academy_seq
+            startValue: 1
+
+        - createTable:
+            tableName: academies
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: academy_pk
+                  name: id
+                  type: bigint
+              - column:
+                  name: name
+                  type: varchar(125)
+                  constraints:
+                    - nullable: false
+                    - unique: true
+                    - uniqueConstraintName: academies_name_uniq
+              - column:
+                  name: link_tag
+                  type: varchar(255)
+              - column:
+                  name: icon_tag
+                  type: varchar(255)
+
+        - addDefaultValue:
+            tableName: academies
+            columnName: id
+            defaultValueSequenceNext: academy_seq

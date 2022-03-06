@@ -5,11 +5,10 @@ databaseChangeLog:
       preConditions:
         - onFail: MARK_RAN
         - tableExists:
-            schemaName: server
             tableName: academies
         - sqlCheck:
             - expectedResult: 0
-            - sql: select count(1) from server.academies
+            - sql: select count(1) from academies
 
       changes:
         - tagDatabase:
@@ -17,10 +16,10 @@ databaseChangeLog:
 
         - sql:
             sql:
-              insert into server.academies (id, name, link_tag, icon_tag) values (2, 'Нетология', 'https://netology.ru/', 'tag');
-              insert into server.academies (id, name, link_tag, icon_tag) values (1, 'SkillBox', 'https://skillbox.ru/', 'tag');
+              insert into academies (id, name, link_tag, icon_tag) values (2, 'Нетология', 'https://netology.ru/', 'tag');
+              insert into academies (id, name, link_tag, icon_tag) values (1, 'SkillBox', 'https://skillbox.ru/', 'tag');
             endDelimiter: ;
 
         - rollback:
-            sql: delete from server.academies
+            sql: delete from academies
             endDelimiter: ;

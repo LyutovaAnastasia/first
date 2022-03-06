@@ -19,6 +19,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -48,13 +49,8 @@ public class MapperConfig {
             .addMappings(m -> m.<Long>map(CategoryEntity::getId, (target, value) -> target.getCategory().setId(value)))
             .addMappings(m -> m.<String>map(CategoryEntity::getName, (target, value) -> target.getCategory().setName(value)))
             .addMappings(m -> m.<Integer>map(CategoryEntity::getCountOfClasses, (target, value) -> target.getCategory().setCountOfClasses(value)))
-            .addMappings(m -> m.map(CategoryEntity::getAcademyEntitySet, CategoryResponse::setAcademies))
-            .addMappings(m -> m.map(CategoryEntity::getClasses, CategoryResponse::setClasses))
-            .setPostConverter(ctx -> {
-                var src = ctx.getSource();
-                var dst = ctx.getDestination();
-                return dst;
-            });
+//            .addMappings(m -> m.map(CategoryEntity::getAcademyEntitySet, CategoryResponse::setAcademies))
+            .addMappings(m -> m.map(CategoryEntity::getClasses, CategoryResponse::setClasses));
 
         mapper
             .typeMap(CategoryEntity.class, CategoryDto.class)
@@ -81,7 +77,7 @@ public class MapperConfig {
             .setPostConverter(ctx -> {
                 var src = ctx.getSource();
                 var dst = ctx.getDestination();
-                var classIds = src.getClasses().stream().map(e -> e.getId()).collect(Collectors.toList());
+                var classIds = src.getClasses().stream().map(e -> e.getId()).collect(Collectors.toSet());
                 dst.setClasses(classIds);
                 return dst;
             });
@@ -95,6 +91,7 @@ public class MapperConfig {
             .addMappings(m -> m.map(AcademyProjection::getIconTag, AcademyDto::setIconTag))
             .setPostConverter(ctx -> {
                 var src = ctx.getSource();
+
                 var dst = ctx.getDestination();
 
                 var ingredientIds = insertDataLong(src.getClasses());
@@ -155,14 +152,14 @@ public class MapperConfig {
             .collect(Collectors.toList());
     }
 
-    private static List<Long> insertDataLong(String source) {
+    private static Set<Long> insertDataLong(String source) {
         if (source == null) {
             return null;
         }
         return Arrays.stream(source.split(","))
             .filter(Predicate.not("*"::equals))
             .map(Long::parseLong)
-            .collect(Collectors.toList());
+            .collect(Collectors.toSet());
     }
 
 
