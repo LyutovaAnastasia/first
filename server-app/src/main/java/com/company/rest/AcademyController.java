@@ -51,7 +51,13 @@ public class AcademyController {
     public ResponseEntity<Page<AcademyDto>> getAllAcademiesPage(@PathVariable("id") Long id,
            @RequestParam(value = "page", required = false) Integer page,
            @RequestParam(value = "size", required = false) Integer size                                                  ) {
-        return ResponseEntity.ok(academyService.getAllPage(id, PageRequest.of(page, size)));
+        Page<AcademyDto> allPage = academyService.getAllPage(id, PageRequest.of(page, size));
+        return ResponseEntity.ok(allPage);
+    }
+
+    @GetMapping("page1/{id}")
+    public ResponseEntity<List<AcademyDto>> getAllAcademiesPage1(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(academyService.getAllPage1(id));
     }
 
 }

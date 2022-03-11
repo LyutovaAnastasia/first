@@ -43,6 +43,7 @@ public class CategoryEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "section_id")
     private SectionEntity section;
+    //private Long sectionId;
 
     private Integer countOfClasses;
 

@@ -38,8 +38,12 @@ databaseChangeLog:
                   name: link_tag
                   type: varchar(255)
               - column:
-                  name: icon_tag
-                  type: varchar(255)
+                  name: image_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_images_company_image
+                    references: server.images_company(id)
 
         - addDefaultValue:
             schemaName: server

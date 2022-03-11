@@ -72,7 +72,7 @@ public class MapperConfig {
             .addMappings(m -> m.map(AcademyEntity::getId, AcademyDto::setId))
             .addMappings(m -> m.map(AcademyEntity::getName, AcademyDto::setName))
             .addMappings(m -> m.map(AcademyEntity::getLinkTag, AcademyDto::setLinkTag))
-            .addMappings(m -> m.map(AcademyEntity::getIconTag, AcademyDto::setIconTag))
+            .addMappings(m -> m.skip(AcademyDto::setIconTag))
             .addMappings(m -> m.skip(AcademyDto::setClasses))
             .setPostConverter(ctx -> {
                 var src = ctx.getSource();

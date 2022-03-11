@@ -7,15 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
@@ -35,7 +27,8 @@ public class AcademyEntity {
     private Long id;
     private String name;
     private String linkTag;
-    private String iconTag;
+    @Column(name = "image_id")
+    private Long iconTag;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "academy")
     private List<ClassEntity> classes;
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "academyEntitySet")

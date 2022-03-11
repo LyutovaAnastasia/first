@@ -108,16 +108,16 @@
                     <mainClass>${start-class}</mainClass>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.liquibase</groupId>
-                <artifactId>liquibase-maven-plugin</artifactId>
-                <version>4.4.3</version>
-                <configuration>
-                    <skip>false</skip>
-                    <propertyFile>src/main/resources/application.yaml</propertyFile>
-                    <changeLogFile>src/main/resources/liquibase/changelog.yaml</changeLogFile>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.liquibase</groupId>-->
+<!--                <artifactId>liquibase-maven-plugin</artifactId>-->
+<!--                <version>4.4.3</version>-->
+<!--                <configuration>-->
+<!--                    <skip>false</skip>-->
+<!--                    <propertyFile>src/main/resources/application.yaml</propertyFile>-->
+<!--                    <changeLogFile>src/main/resources/liquibase/changelog.yaml</changeLogFile>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 </project>

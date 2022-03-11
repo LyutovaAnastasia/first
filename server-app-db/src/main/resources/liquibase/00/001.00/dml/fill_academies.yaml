@@ -17,8 +17,8 @@ databaseChangeLog:
 
         - sql:
             sql:
-              insert into server.academies (id, name, link_tag, icon_tag) values (2, 'Нетология', 'https://netology.ru/', 'tag');
-              insert into server.academies (id, name, link_tag, icon_tag) values (1, 'SkillBox', 'https://skillbox.ru/', 'tag');
+              insert into server.academies (id, name, link_tag, image_id) values (2, 'Нетология', 'https://netology.ru/', 1);
+              insert into server.academies (id, name, link_tag, image_id) values (1, 'SkillBox', 'https://skillbox.ru/', 2);
             endDelimiter: ;
 
         - rollback:

@@ -67,6 +67,16 @@ public class AcademyServiceImpl implements AcademyService {
 
     }
 
+    @Override
+    @Transactional
+    public List<AcademyDto> getAllPage1(Long id) {
+        List<AcademyProjection> page = academyRepository.getAcademiesByCategoryId1(id);
+        return page.stream()
+            .map(e -> mapper.map(e, AcademyDto.class))
+            .collect(Collectors.toList());
+
+    }
+
 //    public <D, T> D map(T entity, Class<D> outClass) {
 //        return mapper.map(entity, outClass);
 //    }

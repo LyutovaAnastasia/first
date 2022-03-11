@@ -1,44 +1,42 @@
 databaseChangeLog:
   - changeSet:
-      id: 00.001.00/ddl/academies
+      id: 00.001.00/ddl/images_company
       author: LyutovaAnastasia
       preConditions:
         - onFail: MARK_RAN
         - not:
             - tableExists:
-                tableName: academies
+                schemaName: server
+                tableName: images_company
       changes:
         - tagDatabase:
             tag: release/00.001.00
 
         - createSequence:
-            sequenceName: academy_seq
+            schemaName: server
+            sequenceName: images_company_seq
             startValue: 1
 
         - createTable:
-            tableName: academies
+            schemaName: server
+            tableName: images_company
             columns:
               - column:
                   constraints:
                     primaryKey: true
-                    primaryKeyName: academy_pk
+                    primaryKeyName: images_company_pk
                   name: id
                   type: bigint
               - column:
-                  name: name
-                  type: varchar(125)
+                  name: image
+                  type: varchar(255)
                   constraints:
                     - nullable: false
                     - unique: true
-                    - uniqueConstraintName: academies_name_uniq
-              - column:
-                  name: link_tag
-                  type: varchar(255)
-              - column:
-                  name: icon_tag
-                  type: varchar(255)
+                    - uniqueConstraintName: images_company_image_uniq
 
         - addDefaultValue:
-            tableName: academies
+            schemaName: server
+            tableName: images_company
             columnName: id
-            defaultValueSequenceNext: academy_seq
+            defaultValueSequenceNext: images_company_seq

@@ -15,4 +15,5 @@ public interface AcademyService {
     void deleteAcademy(Long id);
 
     Page<AcademyDto> getAllPage(Long id, Pageable pageable);
+    List<AcademyDto> getAllPage1(Long id);
 }

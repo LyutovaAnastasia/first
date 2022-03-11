@@ -1,5 +1,7 @@
 package com.company.persistence.projection;
 
+import javax.persistence.Transient;
+
 public interface AcademyProjection {
     Long getId();
     String getName();
