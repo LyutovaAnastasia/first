@@ -21,6 +21,9 @@ databaseChangeLog:
   - include:
       file: ddl/classes.yaml
       relativeToChangelogFile: true
+  - include:
+      file: ddl/reviews.yaml
+      relativeToChangelogFile: true
 
   - include:
       file: dml/fill_sections.yaml
@@ -39,5 +42,8 @@ databaseChangeLog:
       relativeToChangelogFile: true
   - include:
       file: dml/fill_classes.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: dml/fill_reviews.yaml
       relativeToChangelogFile: true
 

@@ -7,15 +7,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -31,21 +24,28 @@ public class ClassEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "classSeqGenerator")
     @SequenceGenerator(name = "classSeqGenerator", sequenceName = "class_seq", allocationSize = 1)
     private Long id;
-
     private String name;
-
     private Integer term;
-
     private Integer price;
+    private Integer rating;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "academy_id")
-    private AcademyEntity academy;
+    private Integer countOfReviews;
+    private String description;
+
+    private String linkTag;
+    private Long imageId;
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "academy_id")
+//    private AcademyEntity academy;
+    private Long academyId;
 
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "category_id")
 //    private CategoryEntity category;
     private Long categoryId;
 
-    private Integer rating;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "classId")
+    private List<ReviewEntity> reviews;
 }

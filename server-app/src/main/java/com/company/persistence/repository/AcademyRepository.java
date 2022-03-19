@@ -16,7 +16,7 @@ import java.util.List;
 public interface AcademyRepository extends JpaRepository<AcademyEntity, Long> {
 
     //    @Query(name = "User.findBySpringDataNamedQuery", nativeQuery = true)
-    @Query(value = "select a.id, a.name, a.link_tag as linkTag, (SELECT image FROM server.images_company WHERE id = a.image_id) as iconTag," +
+    @Query(value = "select a.id, a.name, a.link_tag as linkTag, (SELECT image FROM server.images_company WHERE id = a.image_id) as imageId," +
         "             (select array_to_string(array_agg(cl.id), ',', '*')" +
         "             from server.classes cl where a.id = cl.academy_id) classes " +
         "                  from server.academies a " +
@@ -30,21 +30,16 @@ public interface AcademyRepository extends JpaRepository<AcademyEntity, Long> {
 //        "         left join server.categories_academies ca on a.id = ca.academies_id" +
 //        "         left join server.categories c on ca.categories_id = c.id " +
 //        " where c.id = :categoryId", nativeQuery = true)
-    @Query(value = "select a.id, a.name, a.link_tag as linkTag, (SELECT image FROM server.images_company WHERE id = a.image_id) as iconTag," +
+    @Query(value = "select a.id, a.name, a.link_tag as linkTag, (SELECT image FROM server.images_company WHERE id = a.image_id) as imageId," +
     "       (select array_to_string(array_agg(cl.id), ',', '*')" +
     "        from server.classes cl where a.id = cl.academy_id) classes " +
     "from server.academies a" +
     "         left join server.categories_academies ca on a.id = ca.academies_id" +
     "         left join server.categories c on ca.categories_id = c.id" +
-    " where c.id = :categoryId", nativeQuery = true)
-    Page<AcademyProjection> getAcademiesByCategoryId(@Param("categoryId") Long id, Pageable pageable);
-
-    @Query(value = "select a.id, a.name, a.link_tag as linkTag, (SELECT image FROM server.images_company WHERE id = a.image_id) as iconTag," +
-        "       (select array_to_string(array_agg(cl.id), ',', '*')" +
-        "        from server.classes cl where a.id = cl.academy_id) classes " +
+    " where c.id = :categoryId", countQuery = "select count(*) " +
         "from server.academies a" +
         "         left join server.categories_academies ca on a.id = ca.academies_id" +
         "         left join server.categories c on ca.categories_id = c.id" +
         " where c.id = :categoryId", nativeQuery = true)
-    List<AcademyProjection> getAcademiesByCategoryId1(@Param("categoryId") Long id);
+    Page<AcademyProjection> getAcademiesByCategoryId(@Param("categoryId") Long id, Pageable pageable);
 }

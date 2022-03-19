@@ -1,0 +1,88 @@
+databaseChangeLog:
+  - changeSet:
+      id: 00.001.00/ddl/reviews
+      author: LyutovaAnastasia
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                schemaName: server
+                tableName: reviews
+      changes:
+        - tagDatabase:
+            tag: release/00.001.00
+
+        - createSequence:
+            schemaName: server
+            sequenceName: review_seq
+            startValue: 1
+
+        - createTable:
+            schemaName: server
+            tableName: reviews
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: review_pk
+                  name: id
+                  type: bigint
+              - column:
+                  name: begin_date
+                  type: date
+              - column:
+                  name: end_date
+                  type: date
+              - column:
+                  name: minuses
+                  type: varchar(255)
+              - column:
+                  name: pluses
+                  type: varchar(255)
+              - column:
+                  name: comment
+                  type: varchar(255)
+              - column:
+                  name: mentor
+                  type: boolean
+              - column:
+                  name: employed
+                  type: boolean
+              - column:
+                  name: date
+                  type: date
+              - column:
+                  name: mark
+                  type: integer
+              - column:
+                  name: class_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_classes_reviews_id
+                    references: server.classes(id)
+
+
+        - addDefaultValue:
+            schemaName: server
+            tableName: reviews
+            columnName: id
+            defaultValueSequenceNext: review_seq
+
+        - addDefaultValue:
+            schemaName: server
+            tableName: reviews
+            columnName: mark
+            defaultValueNumeric: '0'
+
+        - addDefaultValue:
+            schemaName: server
+            tableName: reviews
+            columnName: mentor
+            defaultValueBoolean: false
+
+        - addDefaultValue:
+            schemaName: server
+            tableName: reviews
+            columnName: employed
+            defaultValueBoolean: false

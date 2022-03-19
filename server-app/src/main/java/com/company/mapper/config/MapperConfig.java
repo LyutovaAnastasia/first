@@ -3,6 +3,7 @@ package com.company.mapper.config;
 import com.company.domain.model.dto.AcademyDto;
 import com.company.domain.model.dto.CategoryDto;
 import com.company.domain.model.dto.ClassDto;
+import com.company.domain.model.dto.ClassDtoHeader;
 import com.company.domain.model.response.CategoryResponse;
 import com.company.domain.model.response.SectionResponse;
 import com.company.persistence.entity.AcademyEntity;
@@ -10,6 +11,7 @@ import com.company.persistence.entity.CategoryEntity;
 import com.company.persistence.entity.ClassEntity;
 import com.company.persistence.entity.SectionEntity;
 import com.company.persistence.projection.AcademyProjection;
+import com.company.persistence.projection.ClassProjection;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -65,7 +67,19 @@ public class MapperConfig {
             .addMappings(m -> m.map(ClassEntity::getName, ClassDto::setName))
             .addMappings(m -> m.map(ClassEntity::getTerm, ClassDto::setTerm))
             .addMappings(m -> m.map(ClassEntity::getPrice, ClassDto::setPrice))
-            .addMappings(m -> m.map(ClassEntity::getRating, ClassDto::setRating));
+            .addMappings(m -> m.map(ClassEntity::getRating, ClassDto::setRating))
+            .addMappings(m -> m.map(ClassEntity::getCountOfReviews, ClassDto::setCountOfReviews));
+
+        mapper
+            .typeMap(ClassProjection.class, ClassDtoHeader.class)
+            .addMappings(m -> m.map(ClassProjection::getId, ClassDtoHeader::setId))
+            .addMappings(m -> m.map(ClassProjection::getName, ClassDtoHeader::setName))
+            .addMappings(m -> m.map(ClassProjection::getTerm, ClassDtoHeader::setTerm))
+            .addMappings(m -> m.map(ClassProjection::getPrice, ClassDtoHeader::setRating))
+            .addMappings(m -> m.map(ClassProjection::getCountOfReviews, ClassDtoHeader::setCountOfReviews))
+            .addMappings(m -> m.map(ClassProjection::getDescription, ClassDtoHeader::setDescription))
+            .addMappings(m -> m.map(ClassProjection::getLinkTag, ClassDtoHeader::setLinkTag))
+            .addMappings(m -> m.map(ClassProjection::getImageId, ClassDtoHeader::setIconTag));
 
         mapper
             .typeMap(AcademyEntity.class, AcademyDto.class)
@@ -88,18 +102,12 @@ public class MapperConfig {
             .addMappings(m -> m.map(AcademyProjection::getId, AcademyDto::setId))
             .addMappings(m -> m.map(AcademyProjection::getName, AcademyDto::setName))
             .addMappings(m -> m.map(AcademyProjection::getLinkTag, AcademyDto::setLinkTag))
-            .addMappings(m -> m.map(AcademyProjection::getIconTag, AcademyDto::setIconTag))
+            .addMappings(m -> m.map(AcademyProjection::getImageId, AcademyDto::setIconTag))
             .setPostConverter(ctx -> {
                 var src = ctx.getSource();
-
                 var dst = ctx.getDestination();
-
                 var ingredientIds = insertDataLong(src.getClasses());
                 dst.setClasses(ingredientIds);
-//
-//                    var toppingsIds = insertDataLong(src.getCategories());
-//                    dst.setCategories(toppingsIds);
-
                 return dst;
             });
 

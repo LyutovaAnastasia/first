@@ -27,10 +27,12 @@ public class AcademyEntity {
     private Long id;
     private String name;
     private String linkTag;
-    @Column(name = "image_id")
-    private Long iconTag;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "academy")
+    private Long imageId;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "academyId")
     private List<ClassEntity> classes;
+
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "academyEntitySet")
     private Set<CategoryEntity> categories;
 }

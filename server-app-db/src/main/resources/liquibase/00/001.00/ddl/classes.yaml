@@ -40,6 +40,22 @@ databaseChangeLog:
                   name: rating
                   type: smallint
               - column:
+                  name: description
+                  type: varchar(225)
+              - column:
+                  name: count_of_reviews
+                  type: integer
+              - column:
+                  name: link_tag
+                  type: varchar(225)
+              - column:
+                  name: image_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_images_company_class
+                    references: server.images_company(id)
+              - column:
                   name: academy_id
                   type: bigint
                   constraints:
@@ -60,3 +76,9 @@ databaseChangeLog:
             tableName: classes
             columnName: id
             defaultValueSequenceNext: class_seq
+
+        - addDefaultValue:
+            schemaName: server
+            tableName: classes
+            columnName: count_of_reviews
+            defaultValueNumeric: '0'

@@ -16,4 +16,6 @@ public class ClassDto {
     private Integer term;
     private Integer price;
     private Integer rating;
+
+    private Integer countOfReviews;
 }

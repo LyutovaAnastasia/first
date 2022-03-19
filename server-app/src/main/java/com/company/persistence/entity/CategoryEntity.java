@@ -40,10 +40,10 @@ public class CategoryEntity {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "section_id")
-    private SectionEntity section;
-    //private Long sectionId;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "section_id")
+//    private SectionEntity section;
+    private Long sectionId;
 
     private Integer countOfClasses;
 
@@ -57,6 +57,7 @@ public class CategoryEntity {
 //    @OneToMany(mappedBy = "category")
 //    private Set<CategoryAcademyEntity> academies;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryId")
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "categoryId")
     private List<ClassEntity> classes;
 }

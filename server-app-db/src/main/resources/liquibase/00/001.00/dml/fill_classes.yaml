@@ -17,15 +17,14 @@ databaseChangeLog:
 
         - sql:
             sql:
-              insert into server.classes (id, name, term, price, academy_id, rating, category_id) values (1, 'Python Basic', 0, 40116, 1, 0, 4);
-              insert into server.classes (id, name, term, price, academy_id, rating, category_id) values (2, 'Профессия Python-разработчик', 0, 113419, 1, 0, 4);
-              insert into server.classes (id, name, term, price, academy_id, rating, category_id) values (3, 'Профессия Fullstack-разработчик на Python', 0, 100424, 1, 0, 4);
-              insert into server.classes (id, name, term, price, academy_id, rating, category_id) values (4, 'Python-фреймворк Django', 0, 13886, 1, 0, 4);
-              insert into server.classes (id, name, term, price, academy_id, rating, category_id) values (5, 'Fullstack-разработчик на Python', 18, 119400, 2, 0, 4);
-              insert into server.classes (id, name, term, price, academy_id, rating, category_id) values (6, 'Python-разработчик с нуля', 10, 64800, 2, 0, 4);
-              insert into server.classes (id, name, term, price, academy_id, rating, category_id) values (7, 'Python для анализа данных', 0, 31500, 2, 0, 4);
-              insert into server.classes (id, name, term, price, academy_id, rating, category_id) values (8, 'Django. Cоздание backend-приложений', 1, 15900, 2, 0, 4);
-
+              insert into server.classes (id, name, term, price, rating, description, count_of_reviews, link_tag, image_id, academy_id, category_id) values (1, 'Python Basic', 0, 40116, 0, 'description', 0, 'linkTag', 1, 1, 4);
+              insert into server.classes (id, name, term, price, rating, description, count_of_reviews, link_tag, image_id, academy_id, category_id) values (2, 'Профессия Python-разработчик', 0, 113419, 0, 'description', 0, 'linkTag', 1, 1, 4);
+              insert into server.classes (id, name, term, price, rating, description, count_of_reviews, link_tag, image_id, academy_id, category_id) values (3, 'Профессия Fullstack-разработчик на Python', 0, 100424, 0, 'description', 0, 'linkTag', 1, 1, 4);
+              insert into server.classes (id, name, term, price, rating, description, count_of_reviews, link_tag, image_id, academy_id, category_id) values (4, 'Python-фреймворк Django', 0, 13886, 0, 'description', 0, 'linkTag', 1, 1, 4);
+              insert into server.classes (id, name, term, price, rating, description, count_of_reviews, link_tag, image_id, academy_id, category_id) values (5, 'Fullstack-разработчик на Python', 18, 119400, 0, 'description', 0, 'linkTag', 1, 2, 4);
+              insert into server.classes (id, name, term, price, rating, description, count_of_reviews, link_tag, image_id, academy_id, category_id) values (6, 'Python-разработчик с нуля', 10, 64800, 0, 'description', 0, 'linkTag', 1, 2, 4);
+              insert into server.classes (id, name, term, price, rating, description, count_of_reviews, link_tag, image_id, academy_id, category_id) values (7, 'Python для анализа данных', 0, 31500, 0, 'description', 0, 'linkTag', 1, 2, 4);
+              insert into server.classes (id, name, term, price, rating, description, count_of_reviews, link_tag, image_id, academy_id, category_id) values (8, 'Django. Cоздание backend-приложений', 1, 15900, 0, 'description', 0, 'linkTag', 1, 2, 4);
             endDelimiter: ;
 
         - rollback:

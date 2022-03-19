@@ -32,16 +32,4 @@ public class SectionController {
         return ResponseEntity.ok(sectionService.getAll());
     }
 
-    @GetMapping("bar/{id}")
-    public ResponseEntity<SectionResponse> getSectionBar(@PathVariable Long id) {
-        if (id == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        return ResponseEntity.ok(sectionService.getSection(id));
-    }
-
-    @GetMapping("/bar")
-    public ResponseEntity<List<SectionResponse>> getAllSectionsBar() {
-        return ResponseEntity.ok(sectionService.getAll());
-    }
 }
