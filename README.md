@@ -13,7 +13,7 @@ The following tools have been used:
 + **IDE**: Intellij Idea
 + **Version control system**: git, liquibase for bd
 
-For tracing was used *Spring Cloud Sleuth*
+For tracing was used *Spring Cloud Sleuth, Zalando*
 
 For logging was used *Log4j2 lombok, logback*
 ## Start
