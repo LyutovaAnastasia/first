@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: 00.001.00/ddl/roles
+      author: LyutovaAnastasia
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                schemaName: server
+                tableName: roles
+      changes:
+        - tagDatabase:
+            tag: release/00.001.00
+
+        - createSequence:
+            schemaName: server
+            sequenceName: role_seq
+            startValue: 3
+
+        - createTable:
+            schemaName: server
+            tableName: roles
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: role_pk
+                  name: id
+                  type: bigint
+              - column:
+                  name: name
+                  type: varchar(125)
+
+
+        - addDefaultValue:
+            schemaName: server
+            tableName: roles
+            columnName: id
+            defaultValueSequenceNext: role_seq

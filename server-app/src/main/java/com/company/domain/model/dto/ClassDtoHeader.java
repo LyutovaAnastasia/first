@@ -14,3 +14,4 @@ public class ClassDtoHeader extends ClassDto {
     private String linkTag;
     private String iconTag;
 }
+

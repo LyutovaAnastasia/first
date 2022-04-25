@@ -15,7 +15,7 @@ databaseChangeLog:
         - createSequence:
             schemaName: server
             sequenceName: category_seq
-            startValue: 1
+            startValue: 23
 
         - createTable:
             schemaName: server

@@ -1,15 +1,12 @@
 spring:
+  application:
+    name: server
   datasource:
 #    url: jdbc:postgresql://postgresdb:5432/postgres?currentSchema=server
     url: jdbc:postgresql://localhost:5432/postgres?currentSchema=server
-#    url: jdbc:postgresql://81.163.28.113:5432/postgres?currentSchema=server
     username: postgres
     password: qwerty
     driver-class-name: org.postgresql.Driver
-
-  liquibase:
-    enabled: false
-    change-log: classpath:liquibase/changelog.yaml
 
 #  jpa:
 #    properties:
@@ -17,6 +14,48 @@ spring:
 #        show_sql: true
 #        format_sql: true
 
+#  liquibase:
+#    enabled: false
+#    change-log: classpath:liquibase/changelog.yaml
+
+app:
+  jwt:
+    secretKey: MySuperSigningSecretKeyForMyServerApplicationMyMegaSigningSecretSecretKeyForMyServerApplication
+    tokenExpirationAfterDays: 14
+    tokenPrefix: Bearer
+
+logging:
+  level:
+    org.zalando.logbook: TRACE
+
+logbook:
+  strategy: default
+  exclude:
+    - /actuator/**
+    - /swagger-ui/**
+    - /v3/api-docs/**
+    - /api/admin/**
+  format:
+    style: json
+  body:
+    max-size: 3000
+    filters:
+#      body:
+      string: nickname,name,email
+      number: rating,mark,price
+  headers:
+    enabled: false
+  logger:
+    active: true
+
+
+springdoc:
+  swagger-ui:
+    path: /
+
+#springdoc:
+#  swagger-ui:
+#    url: /openapi.yml
 
 #logging:
 #  level:
@@ -29,4 +68,3 @@ spring:
 #            sql:
 #              BasicBinder:
 #                TRACE
-

@@ -15,7 +15,7 @@ databaseChangeLog:
         - createSequence:
             schemaName: server
             sequenceName: class_seq
-            startValue: 1
+            startValue: 9
 
         - createTable:
             schemaName: server

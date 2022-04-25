@@ -22,7 +22,16 @@ databaseChangeLog:
       file: ddl/classes.yaml
       relativeToChangelogFile: true
   - include:
+      file: ddl/users.yaml
+      relativeToChangelogFile: true
+  - include:
       file: ddl/reviews.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: ddl/roles.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: ddl/users_roles.yaml
       relativeToChangelogFile: true
 
   - include:
@@ -44,6 +53,14 @@ databaseChangeLog:
       file: dml/fill_classes.yaml
       relativeToChangelogFile: true
   - include:
+      file: dml/fill_users.yaml
+      relativeToChangelogFile: true
+  - include:
       file: dml/fill_reviews.yaml
       relativeToChangelogFile: true
-
+  - include:
+      file: dml/fill_roles.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: dml/fill_users_roles.yaml
+      relativeToChangelogFile: true

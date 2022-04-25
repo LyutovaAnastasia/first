@@ -15,7 +15,7 @@ databaseChangeLog:
         - createSequence:
             schemaName: server
             sequenceName: section_seq
-            startValue: 1
+            startValue: 5
 
         - createTable:
             schemaName: server

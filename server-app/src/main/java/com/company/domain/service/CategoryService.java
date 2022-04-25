@@ -1,12 +1,11 @@
 package com.company.domain.service;
 
-import com.company.domain.model.dto.CategoryDto;
+import com.company.domain.model.dto.admin.CategoryAdminDto;
+import com.company.domain.model.response.CategoryAdminResponse;
 import com.company.domain.model.response.CategoryResponse;
 import com.company.persistence.entity.CategoryEntity;
-import com.company.persistence.repository.CategoryRepository;
-import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 public interface CategoryService {
@@ -14,4 +13,11 @@ public interface CategoryService {
 //    CategoryDto findCategoryById(Long id);
 
     CategoryResponse getCategory(Long id);
+    List<CategoryAdminDto> getAll();
+
+    void updateCategoryAfterInsertClass(Long id);
+
+    List<CategoryAdminResponse> getAllResponse();
+
+    CategoryEntity findById(Long id);
 }

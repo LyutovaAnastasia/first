@@ -14,7 +14,7 @@ databaseChangeLog:
         - createSequence:
             schemaName: server
             sequenceName: categories_academies_seq
-            startValue: 1
+            startValue: 3
         - createTable:
             schemaName: server
             tableName: categories_academies

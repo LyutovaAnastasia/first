@@ -25,5 +25,6 @@ public class SectionEntity {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "sectionId")
+    @OrderBy("id ASC")
     private List<CategoryEntity> categories;
 }

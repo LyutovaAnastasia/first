@@ -1,0 +1,54 @@
+databaseChangeLog:
+  - changeSet:
+      id: 00.001.00/ddl/users
+      author: LyutovaAnastasia
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                schemaName: server
+                tableName: users
+      changes:
+        - tagDatabase:
+            tag: release/00.001.00
+
+        - createSequence:
+            schemaName: server
+            sequenceName: user_seq
+            startValue: 2
+
+        - createTable:
+            schemaName: server
+            tableName: users
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: user_pk
+                  name: id
+                  type: bigint
+              - column:
+                  name: username
+                  type: varchar(255)
+                  constraints:
+                    - nullable: false
+                    - unique: true
+                    - uniqueConstraintName: users_username_uniq
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    - nullable: false
+                    - unique: true
+                    - uniqueConstraintName: users_email_uniq
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    - nullable: false
+
+        - addDefaultValue:
+            schemaName: server
+            tableName: users
+            columnName: id
+            defaultValueSequenceNext: user_seq

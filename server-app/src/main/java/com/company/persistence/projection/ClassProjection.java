@@ -9,5 +9,5 @@ public interface ClassProjection {
     Integer getCountOfReviews();
     String getDescription();
     String getLinkTag();
-    String getImageId();
+    String getIconTag();
 }

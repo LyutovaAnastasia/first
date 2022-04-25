@@ -29,6 +29,8 @@ public class ReviewEntity {
     private Boolean employed;
     private Date date;
     private Integer mark;
+    private Boolean active;
 
     private Long classId;
+    private Long userId;
 }

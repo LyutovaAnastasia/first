@@ -15,7 +15,7 @@ databaseChangeLog:
         - createSequence:
             schemaName: server
             sequenceName: review_seq
-            startValue: 1
+            startValue: 3
 
         - createTable:
             schemaName: server
@@ -55,12 +55,22 @@ databaseChangeLog:
                   name: mark
                   type: integer
               - column:
+                  name: active
+                  type: boolean
+              - column:
                   name: class_id
                   type: bigint
                   constraints:
                     nullable: false
                     foreignKeyName: fk_classes_reviews_id
                     references: server.classes(id)
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_users_reviews_id
+                    references: server.users(id)
 
 
         - addDefaultValue:
@@ -86,3 +96,21 @@ databaseChangeLog:
             tableName: reviews
             columnName: employed
             defaultValueBoolean: false
+
+        - addDefaultValue:
+            schemaName: server
+            tableName: reviews
+            columnName: active
+            defaultValueBoolean: false
+
+        - addDefaultValue:
+            schemaName: server
+            tableName: reviews
+            columnName: minuses
+            defaultValue: Не указано
+
+        - addDefaultValue:
+            schemaName: server
+            tableName: reviews
+            columnName: pluses
+            defaultValue: Не указано

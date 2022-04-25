@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: 01.001.00/dml/fill_roles
+      author: LyutovaAnastasia
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            schemaName: server
+            tableName: roles
+        - sqlCheck:
+            - expectedResult: 0
+            - sql: select count(1) from server.roles
+
+      changes:
+        - tagDatabase:
+            tag: release/01.001.00
+
+        - sql:
+            sql:
+              insert into server.roles (id, name) values (1, 'ROLE_ADMIN');
+              insert into server.roles (id, name) values (2, 'ROLE_USER');
+            endDelimiter: ;
+
+        - rollback:
+            sql: delete from server.roles
+            endDelimiter: ;

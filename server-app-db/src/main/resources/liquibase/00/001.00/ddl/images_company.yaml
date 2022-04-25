@@ -15,7 +15,7 @@ databaseChangeLog:
         - createSequence:
             schemaName: server
             sequenceName: images_company_seq
-            startValue: 1
+            startValue: 4
 
         - createTable:
             schemaName: server

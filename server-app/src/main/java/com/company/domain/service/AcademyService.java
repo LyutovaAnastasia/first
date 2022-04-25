@@ -2,6 +2,7 @@ package com.company.domain.service;
 
 import com.company.domain.model.dto.AcademyDto;
 
+import com.company.domain.model.request.AcademyRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -10,7 +11,7 @@ import java.util.List;
 public interface AcademyService {
     AcademyDto getAcademy(Long id);
     List<AcademyDto> getAll();
-    Long addAcademy(AcademyDto academy);
+    Long addAcademy(AcademyRequest academyRequest);
     void updateAcademy(AcademyDto academy);
     void deleteAcademy(Long id);
 

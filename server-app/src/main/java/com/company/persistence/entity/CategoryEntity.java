@@ -47,17 +47,24 @@ public class CategoryEntity {
 
     private Integer countOfClasses;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "categories_academies",
-            joinColumns = @JoinColumn(name = "categories_id"),
-            inverseJoinColumns = @JoinColumn(name = "academies_id")
-    )
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "categories_academies",
+//            joinColumns = @JoinColumn(name = "categories_id"),
+//            inverseJoinColumns = @JoinColumn(name = "academies_id")
+//    )
+//    private Set<AcademyEntity> academyEntitySet;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
     private Set<AcademyEntity> academyEntitySet;
 
 //    @OneToMany(mappedBy = "category")
 //    private Set<CategoryAcademyEntity> academies;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoryId")
     private List<ClassEntity> classes;
+
+    public CategoryEntity(Long id) {
+        this.id = id;
+    }
 }

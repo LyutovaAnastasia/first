@@ -29,10 +29,17 @@ public class AcademyEntity {
     private String linkTag;
     private Long imageId;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "academyId")
     private List<ClassEntity> classes;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "academyEntitySet")
+//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "academyEntitySet")
+//    private Set<CategoryEntity> categories;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "categories_academies",
+            joinColumns = @JoinColumn(name = "academies_id"),
+            inverseJoinColumns = @JoinColumn(name = "categories_id")
+    )
     private Set<CategoryEntity> categories;
 }

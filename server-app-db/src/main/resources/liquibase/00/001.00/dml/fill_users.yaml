@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 01.001.00/dml/fill_users
+      author: LyutovaAnastasia
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            schemaName: server
+            tableName: users
+        - sqlCheck:
+            - expectedResult: 0
+            - sql: select count(1) from server.users
+
+      changes:
+        - tagDatabase:
+            tag: release/01.001.00
+
+        - sql:
+            sql:
+              insert into server.users (id, username, email, password) values (1, 'Admin', 'admin1234@yan.ru', '$2a$12$ivkS11BvbPNRjWsAPC2dvOBYk2fcMThFCzaZh84d3QS3.OhHIB.Ve');
+            endDelimiter: ;
+
+        - rollback:
+            sql: delete from server.users
+            endDelimiter: ;
