@@ -17,7 +17,7 @@ databaseChangeLog:
 
         - sql:
             sql:
-              insert into server.users (id, username, email, password) values (1, 'Admin', 'admin1234@yan.ru', '$2a$12$ivkS11BvbPNRjWsAPC2dvOBYk2fcMThFCzaZh84d3QS3.OhHIB.Ve');
+              insert into server.users (id, username, email, password) values (1, 'Admin', 'admin1234@yan.ru', '$2a$12$D0lmwpJszhaaoIL9ah9g/ukOXD.DR0EPuMODJBIH.nyLBn8Lqi/RC');
             endDelimiter: ;
 
         - rollback:
