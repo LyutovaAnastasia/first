@@ -28,3 +28,6 @@ docker-compose up
 ```
 
 The project is running and available at localhost:8080
+
+### Swagger
+Swagger is available at *http://localhost:8080/*
