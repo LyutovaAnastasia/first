@@ -29,9 +29,9 @@ public class ReviewController {
         return ResponseEntity.status(HttpStatus.CREATED).body(reviewService.addReview(reviewRequest));
     }
 
-    @PutMapping("/admin/{id}")
+    @PutMapping("/admin")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<Void> updateAcademy(@RequestBody ReviewDto reviewDto) throws MethodArgumentTypeMismatchException {
+    public ResponseEntity<Void> updateAcademy(@RequestBody ReviewDto reviewDto) {
         reviewService.updateReview(reviewDto);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
