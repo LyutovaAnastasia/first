@@ -35,6 +35,7 @@ public class MapperConfig {
         mapper
             .getConfiguration()
             .setMatchingStrategy(MatchingStrategies.STRICT)
+ //           .setAmbiguityIgnored(true)
             .setFieldMatchingEnabled(false)
             .setSkipNullEnabled(true)
             .setFieldAccessLevel(org.modelmapper.config.Configuration.AccessLevel.PRIVATE);
@@ -51,7 +52,6 @@ public class MapperConfig {
             .addMappings(m -> m.<Long>map(CategoryEntity::getId, (target, value) -> target.getCategory().setId(value)))
             .addMappings(m -> m.<String>map(CategoryEntity::getName, (target, value) -> target.getCategory().setName(value)))
             .addMappings(m -> m.<Integer>map(CategoryEntity::getCountOfClasses, (target, value) -> target.getCategory().setCountOfClasses(value)))
-//            .addMappings(m -> m.map(CategoryEntity::getAcademyEntitySet, CategoryResponse::setAcademies))
             .addMappings(m -> m.map(CategoryEntity::getClasses, CategoryResponse::setClasses));
 
         mapper
@@ -146,19 +146,6 @@ public class MapperConfig {
                 return dst;
             });
 
-//        mapper
-//            .typeMap(AcademyAdminProjection.class, AcademyAdminDto.class)
-//            .addMappings(m -> m.map(AcademyAdminProjection::getId, AcademyAdminDto::setId))
-//            .addMappings(m -> m.map(AcademyAdminProjection::getName, AcademyAdminDto::setName))
-//            .addMappings(m -> m.skip(AcademyAdminDto::setCategories))
-//            .setPostConverter(ctx -> {
-//                var src = ctx.getSource();
-//                var dst = ctx.getDestination();
-//                var ingredientIds = insertDataLong(src.getCategories());
-//                dst.setCategories(ingredientIds);
-//                return dst;
-//            });
-
         mapper
             .typeMap(ReviewProjection.class, ReviewDto.class)
             .addMappings(m -> m.map(ReviewProjection::getId, ReviewDto::setId))
@@ -213,44 +200,4 @@ public class MapperConfig {
             .map(Long::parseLong)
             .collect(Collectors.toSet());
     }
-
-    public <T> List<T> magicalListGetter() {
-        return new ArrayList<T>();
-    }
-
-    //        Converter<List<RowDto>, List<DeckProxyDto>> rowConverter = ctx -> {
-//            var src = ctx.getSource();
-//            var decksWithRows = src.stream()
-////                .collect(Collectors.groupingBy(RowDto::getDeck));
-//
-//            var result = decksWithRows.keySet().stream()
-//                .map(e -> {
-//                    var rows = decksWithRows.get(e).stream().map(m -> mapper.map(m, RowProxyDto.class)).collect(Collectors.toList());
-//                    return DeckProxyDto.builder()
-////                        .name(e)
-//                        .rows(rows)
-//                        .build();
-//                }).collect(Collectors.toList());
-//            return result;
-//        };
 }
-
-//        mapper
-//                .typeMap(AcademyEntity.class, AcademyDto.class)
-//                .addMappings(m -> m.map(AcademyEntity::getId, AcademyDto::setId))
-//                .addMappings(m -> m.map(AcademyEntity::getName, AcademyDto::setName))
-//                .addMappings(m -> m.map(AcademyEntity::getLinkTag, AcademyDto::setLinkTag))
-//                .addMappings(m -> m.map(AcademyEntity::getIconTag, AcademyDto::setIconTag));
-//                .addMappings(m -> m.<List<ClassEntity>>map(source -> source.getClasses(), (target, value) -> {
-//                    System.out.println();
-//                    var collect = Optional.ofNullable(value).orElse(Collections.emptyList()).stream().map(e -> e.getId()).collect(Collectors.toList());
-//                    target.setClasses(collect);
-//                }));
-//        value.stream().map(e -> e.getId()).collect(Collectors.toList())
-//                .addMappings(m -> m.<List<CategoryEntity>>map(source -> source.getCategories(), (target, value) -> target.setClasses(value.stream().map(e -> e.getId()).collect(Collectors.toList()))));
-//                .addMappings(m -> m.map(AcademyEntity::getClasses, AcademyDto::setClasses))
-//                .addMappings(m -> m.map(AcademyEntity::getCategories, AcademyDto::setCategories));
-
-//        mapper
-//                .typeMap(GetDatabaseInfoResponse.class, GetDecksProxyResponse.class)
-//                .addMappings(m -> m.using(rowConverter).map(GetDatabaseInfoResponse::getRows, GetDecksProxyResponse::setDecks));

@@ -82,6 +82,12 @@
             <type>pom</type>
             <scope>import</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>4.5.1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -170,7 +176,9 @@
 <!--                          <packageName>com.company</packageName>-->
 <!--                          <apiPackage>com.company.rest</apiPackage>-->
 <!--                          <modelPackage>com.company.domain.model</modelPackage>-->
+                          <output>${project.basedir}/server-app/src/main/resources/static</output>
                           <configOptions>
+                              <sourceFolder>swagger</sourceFolder>
                               <delegatePattern>true</delegatePattern>
                               <interfaceOnly>true</interfaceOnly>
                           </configOptions>
