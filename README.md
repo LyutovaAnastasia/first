@@ -30,4 +30,7 @@ docker-compose up
 The project is running and available at localhost:8080
 
 ### Swagger
+[swagger](http://editor.swagger.io/?raw=https://raw.githubusercontent.com/LyutovaAnastasia/reviews-server-app/master/swagger.yaml)
+
+
 Swagger is available at *http://localhost:8080/*

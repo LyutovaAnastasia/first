@@ -22,4 +22,5 @@ docker-up:
 	docker-compose up
 run:
 	mvn spring-boot:run
-
+swagger:
+	curl http://localhost:8080/v3/api-docs.yaml -o swagger.yaml

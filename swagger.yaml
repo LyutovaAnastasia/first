@@ -1,0 +1,676 @@
+openapi: 3.0.1
+info:
+  title: Reviews API
+  description: This api was written to develop a site with reviews of different IT
+    online academies
+  version: "1.0"
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+paths:
+  /api/review/admin/{id}:
+    put:
+      tags:
+      - review-controller
+      operationId: updateAcademy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+      security:
+      - bearerAuth: []
+  /api/review:
+    post:
+      tags:
+      - review-controller
+      operationId: addReview
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: integer
+                format: int64
+      security:
+      - bearerAuth: []
+  /api/class/admin:
+    get:
+      tags:
+      - class-controller
+      operationId: getAllClasses
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClassDto'
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - class-controller
+      operationId: addClass
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClassRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: integer
+                format: int64
+      security:
+      - bearerAuth: []
+  /api/auth/registration:
+    post:
+      tags:
+      - auth-controller
+      operationId: signUp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignUpRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: integer
+                format: int64
+  /api/auth/login:
+    post:
+      tags:
+      - auth-controller
+      operationId: signIn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignInRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: integer
+                format: int64
+  /api/academy/admin:
+    post:
+      tags:
+      - academy-controller
+      operationId: addAcademy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcademyRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: integer
+                format: int64
+      security:
+      - bearerAuth: []
+  /api/section:
+    get:
+      tags:
+      - section-controller
+      operationId: getAllSections
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SectionResponse'
+  /api/section/{id}:
+    get:
+      tags:
+      - section-controller
+      operationId: getSection
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SectionResponse'
+  /api/review/admin/proactive:
+    get:
+      tags:
+      - review-controller
+      operationId: getAllNoActiveReviews
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReviewDto'
+      security:
+      - bearerAuth: []
+  /api/review/admin/active:
+    get:
+      tags:
+      - review-controller
+      operationId: getAllActiveReviews
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReviewDto'
+      security:
+      - bearerAuth: []
+  /api/class/reviews/{id}:
+    get:
+      tags:
+      - class-controller
+      operationId: getClass
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ClassResponse'
+      security:
+      - bearerAuth: []
+  /api/category/{id}:
+    get:
+      tags:
+      - category-controller
+      operationId: getCategory
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CategoryResponse'
+      security:
+      - bearerAuth: []
+  /api/category/response/admin:
+    get:
+      tags:
+      - category-controller
+      operationId: getAllResponse
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CategoryAdminResponse'
+      security:
+      - bearerAuth: []
+  /api/category/admin:
+    get:
+      tags:
+      - category-controller
+      operationId: getAllCategories
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CategoryAdminDto'
+      security:
+      - bearerAuth: []
+  /api/academy:
+    get:
+      tags:
+      - academy-controller
+      operationId: getAllAcademies
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AcademyDto'
+      security:
+      - bearerAuth: []
+  /api/academy/{id}:
+    get:
+      tags:
+      - academy-controller
+      operationId: getAcademy
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AcademyDto'
+      security:
+      - bearerAuth: []
+  /api/academy/page/{id}:
+    get:
+      tags:
+      - academy-controller
+      operationId: getAllAcademiesPage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageAcademyDto'
+      security:
+      - bearerAuth: []
+components:
+  schemas:
+    ReviewDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        beginDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        minuses:
+          type: string
+        pluses:
+          type: string
+        comment:
+          type: string
+        mentor:
+          type: boolean
+        employed:
+          type: boolean
+        date:
+          type: string
+          format: date-time
+        mark:
+          type: integer
+          format: int32
+        active:
+          type: boolean
+        classId:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+        username:
+          type: string
+    ReviewRequest:
+      type: object
+      properties:
+        beginDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        minuses:
+          type: string
+        pluses:
+          type: string
+        comment:
+          type: string
+        mentor:
+          type: boolean
+        employed:
+          type: boolean
+        date:
+          type: string
+          format: date-time
+        mark:
+          type: integer
+          format: int32
+        classId:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+    ClassRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        term:
+          type: integer
+          format: int32
+        price:
+          type: integer
+          format: int32
+        description:
+          type: string
+        linkTag:
+          type: string
+        iconTag:
+          type: string
+        academyId:
+          type: integer
+          format: int64
+        categoryId:
+          type: integer
+          format: int64
+    SignUpRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+    SignInRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    AcademyRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        linkTag:
+          type: string
+        iconTag:
+          type: string
+        categories:
+          uniqueItems: true
+          type: array
+          items:
+            type: integer
+            format: int64
+    CategoryDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        countOfClasses:
+          type: integer
+          format: int32
+    SectionDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    SectionResponse:
+      type: object
+      properties:
+        section:
+          $ref: '#/components/schemas/SectionDto'
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/CategoryDto'
+    ClassDtoHeader:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        term:
+          type: integer
+          format: int32
+        price:
+          type: integer
+          format: int32
+        rating:
+          type: integer
+          format: int32
+        countOfReviews:
+          type: integer
+          format: int32
+        description:
+          type: string
+        linkTag:
+          type: string
+        iconTag:
+          type: string
+    ClassResponse:
+      type: object
+      properties:
+        classDto:
+          $ref: '#/components/schemas/ClassDtoHeader'
+        reviews:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReviewDto'
+    ClassDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        term:
+          type: integer
+          format: int32
+        price:
+          type: integer
+          format: int32
+        rating:
+          type: integer
+          format: int32
+        countOfReviews:
+          type: integer
+          format: int32
+    CategoryResponse:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/CategoryDto'
+        classes:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ClassDto'
+    AcademyAdminDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    CategoryAdminDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    CategoryAdminResponse:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/CategoryAdminDto'
+        academies:
+          type: array
+          items:
+            $ref: '#/components/schemas/AcademyAdminDto'
+    AcademyDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        linkTag:
+          type: string
+        iconTag:
+          type: string
+        classes:
+          uniqueItems: true
+          type: array
+          items:
+            type: integer
+            format: int64
+    PageAcademyDto:
+      type: object
+      properties:
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/AcademyDto'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        empty:
+          type: boolean
+    Pageable:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int64
+        sort:
+          $ref: '#/components/schemas/Sort'
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        paged:
+          type: boolean
+        unpaged:
+          type: boolean
+    Sort:
+      type: object
+      properties:
+        empty:
+          type: boolean
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
