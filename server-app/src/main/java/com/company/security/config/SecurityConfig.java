@@ -67,11 +67,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("/api/auth/**").permitAll()
             .antMatchers("/api/**").permitAll()
-            .antMatchers("/").permitAll()
+            .antMatchers("/**").permitAll()
             .antMatchers("/swagger-ui/**").permitAll()
             .antMatchers("/v3/api-docs/**").permitAll()
             .antMatchers("/swagger-ui.html").permitAll()
-            .antMatchers("/swagger-resources/**").permitAll();
+            .antMatchers("/swagger-resources/**").permitAll()
+            .antMatchers("/openapi.yaml").permitAll()
+            .antMatchers("/swagger*/**").permitAll()
+            .anyRequest().permitAll();
 //            .anyRequest().authenticated();
     }
 }
