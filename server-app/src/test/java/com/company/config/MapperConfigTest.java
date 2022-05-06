@@ -91,7 +91,6 @@ class MapperConfigTest {
         assertEquals(from.getCountOfReviews(), to.getCountOfReviews());
     }
 
-
     @Test
     void academyEntityToAcademyDto() {
         var from = generator.nextObject(AcademyEntity.class);
