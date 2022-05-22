@@ -51,7 +51,7 @@ logbook:
     max-size: 3000
     filters:
 #      body:
-      string: nickname,name,email
+      string: nickname,name,email,password
       number: rating,mark,price
   headers:
     enabled: false
