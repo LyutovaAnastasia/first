@@ -1,6 +1,7 @@
 package com.company.rest;
 
 import com.company.domain.model.dto.AcademyDto;
+import com.company.domain.model.dto.admin.AcademyAdminDto;
 import com.company.domain.model.request.AcademyRequest;
 import com.company.domain.service.AcademyService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -30,8 +31,10 @@ public class AcademyController {
         return ResponseEntity.ok(academyService.getAcademy(id));
     }
 
-    @GetMapping()
-    public ResponseEntity<List<AcademyDto>> getAllAcademies() {return ResponseEntity.ok(academyService.getAll());
+
+    @GetMapping("/admin")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<List<AcademyAdminDto>> getAllAcademies() {return ResponseEntity.ok(academyService.getAll());
     }
 
     @PostMapping("/admin")

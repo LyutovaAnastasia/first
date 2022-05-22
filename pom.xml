@@ -60,11 +60,11 @@
           <artifactId>springdoc-openapi-ui</artifactId>
           <version>1.5.12</version>
         </dependency>
-        <dependency>
-            <groupId>org.openapitools</groupId>
-            <artifactId>jackson-databind-nullable</artifactId>
-            <version>0.2.1</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.openapitools</groupId>-->
+<!--            <artifactId>jackson-databind-nullable</artifactId>-->
+<!--            <version>0.2.1</version>-->
+<!--        </dependency>-->
 <!--        <dependency>-->
 <!--            <groupId>org.springdoc</groupId>-->
 <!--            <artifactId>springdoc-openapi-maven-plugin</artifactId>-->
@@ -174,35 +174,35 @@
             <outputDir>${project.basedir}/</outputDir>
           </configuration>
         </plugin>
-        <plugin>
-          <groupId>org.openapitools</groupId>
-          <artifactId>openapi-generator-maven-plugin</artifactId>
-          <version>5.4.0</version>
-          <executions>
-              <execution>
-                  <goals>
-                      <goal>generate</goal>
-                  </goals>
-                  <configuration>
-                      <inputSpec>
-                          ${project.basedir}/server-app/src/main/resources/static/openapi.yml
-                      </inputSpec>
-                      <generatorName>java</generatorName>
-                      <configHelp>true</configHelp>
-<!--                          <packageName>com.company</packageName>-->
-<!--                          <apiPackage>com.company.rest</apiPackage>-->
-<!--                          <modelPackage>com.company.domain.model</modelPackage>-->
-                      <output>${project.basedir}/server-app/src/main/resources/static</output>
-                      <configOptions>
-                          <sourceFolder>swagger</sourceFolder>
-                          <delegatePattern>true</delegatePattern>
-                          <interfaceOnly>true</interfaceOnly>
-                          <apiDocsUrl>/v3/api-docs</apiDocsUrl>
-                      </configOptions>
-                  </configuration>
-              </execution>
-          </executions>
-        </plugin>
+<!--        <plugin>-->
+<!--          <groupId>org.openapitools</groupId>-->
+<!--          <artifactId>openapi-generator-maven-plugin</artifactId>-->
+<!--          <version>5.4.0</version>-->
+<!--          <executions>-->
+<!--              <execution>-->
+<!--                  <goals>-->
+<!--                      <goal>generate</goal>-->
+<!--                  </goals>-->
+<!--                  <configuration>-->
+<!--                      <inputSpec>-->
+<!--                          ${project.basedir}/server-app/src/main/resources/static/openapi.yml-->
+<!--                      </inputSpec>-->
+<!--                      <generatorName>java</generatorName>-->
+<!--                      <configHelp>true</configHelp>-->
+<!--&lt;!&ndash;                          <packageName>com.company</packageName>&ndash;&gt;-->
+<!--&lt;!&ndash;                          <apiPackage>com.company.rest</apiPackage>&ndash;&gt;-->
+<!--&lt;!&ndash;                          <modelPackage>com.company.domain.model</modelPackage>&ndash;&gt;-->
+<!--                      <output>${project.basedir}/server-app/src/main/resources/static</output>-->
+<!--                      <configOptions>-->
+<!--                          <sourceFolder>swagger</sourceFolder>-->
+<!--                          <delegatePattern>true</delegatePattern>-->
+<!--                          <interfaceOnly>true</interfaceOnly>-->
+<!--                          <apiDocsUrl>/v3/api-docs</apiDocsUrl>-->
+<!--                      </configOptions>-->
+<!--                  </configuration>-->
+<!--              </execution>-->
+<!--          </executions>-->
+<!--        </plugin>-->
         <plugin>
           <groupId>org.liquibase</groupId>
           <artifactId>liquibase-maven-plugin</artifactId>

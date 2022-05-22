@@ -9,5 +9,5 @@ import javax.servlet.http.HttpServletResponse;
 public interface UserService {
 
     Long addUser(SignUpRequest signUpRequest);
-    Long loginUser(HttpServletResponse response, SignInRequest signInRequest);
+    String loginUser(HttpServletResponse response, SignInRequest signInRequest);
 }

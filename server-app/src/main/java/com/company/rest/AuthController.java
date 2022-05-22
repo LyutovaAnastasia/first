@@ -21,7 +21,7 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public ResponseEntity<Long> signIn(@RequestBody SignInRequest loginRequest, HttpServletResponse response) {
+    public ResponseEntity<String> signIn(@RequestBody SignInRequest loginRequest, HttpServletResponse response) {
         return ResponseEntity.ok(userService.loginUser(response, loginRequest));
     }
 

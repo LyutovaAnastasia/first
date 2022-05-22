@@ -2,6 +2,7 @@ package com.company.domain.service.impl;
 
 import com.company.domain.model.dto.AcademyDto;
 import com.company.domain.model.dto.ClassDtoHeader;
+import com.company.domain.model.dto.admin.AcademyAdminDto;
 import com.company.domain.model.request.AcademyRequest;
 import com.company.domain.model.response.ClassResponse;
 import com.company.domain.service.AcademyService;
@@ -53,9 +54,9 @@ public class AcademyServiceImpl implements AcademyService {
     }
 
     @Override
-    public List<AcademyDto> getAll() {
+    public List<AcademyAdminDto> getAll() {
         return academyRepository.findAll().stream()
-            .map(e -> mapper.map(e, AcademyDto.class))
+            .map(e -> mapper.map(e, AcademyAdminDto.class))
             .collect(Collectors.toList());
     }
 

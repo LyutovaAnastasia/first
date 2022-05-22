@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
         return result.getId();
     }
 
-    public Long loginUser(HttpServletResponse response, SignInRequest signInRequest) throws AuthenticationException {
+    public String loginUser(HttpServletResponse response, SignInRequest signInRequest) throws AuthenticationException {
 
         try {
             Authentication authentication = authenticationManager
@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
             UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
             String token = jwtTokenProvider.createToken(authentication);
             response.addHeader(jwtConfig.getAuthorizationHeader(), jwtConfig.getTokenPrefix() + token);
-            return userPrincipal.getId();
+            return token;
 
         } catch (AuthenticationException exception) {
             log.error("Unauthorized. Invalid username or password");

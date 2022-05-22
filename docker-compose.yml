@@ -10,10 +10,10 @@ services:
     depends_on:
       - postgresdb
   postgresdb:
-    image: postgres
+    image: review-postgres
     build:
         context: ./utils
-        dockerfile: ./pos.Dockerfile
+        dockerfile: Dockerfile
     ports:
       - "5432:5432"
     environment:
