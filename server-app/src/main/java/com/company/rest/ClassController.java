@@ -37,6 +37,7 @@ public class ClassController {
     }
 
 
+    @GetMapping("")
     public ResponseEntity<List<ClassDto>> getAll() {
         return ResponseEntity.ok(classService.getAll());
     }
