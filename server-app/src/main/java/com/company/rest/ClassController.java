@@ -36,6 +36,11 @@ public class ClassController {
         return ResponseEntity.ok(classService.getAll());
     }
 
+
+    public ResponseEntity<List<ClassDto>> getAll() {
+        return ResponseEntity.ok(classService.getAll());
+    }
+
     @PostMapping("/admin")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Long> addClass(@RequestBody ClassRequest classRequest) {
