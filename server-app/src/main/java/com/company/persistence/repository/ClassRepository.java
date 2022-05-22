@@ -22,11 +22,9 @@ public interface ClassRepository extends JpaRepository<ClassEntity, Long>{
     ClassProjection getsClassById(@Param("classId") Long id);
 
     @Modifying
-    @Query(value = "UPDATE server.classes c SET" +
-        "       count_of_reviews = (select count(*)" +
-        "           from server.reviews where class_id = c.id)," +
-        "       rating = trunc((select avg(mark) from server.reviews where class_id = c.id)) " +
-        "where id = :id", nativeQuery = true)
+    @Query(value = "UPDATE server.classes c SET count_of_reviews = (select count(*) from server.reviews where class_id = c.id and active = true), " +
+        "    rating = trunc((select avg(mark) from server.reviews where class_id = c.id ))" +
+        "   where id = :id", nativeQuery = true)
     void updateCountOfReviewsAndRating(@Param("id") Long id);
 
     @Query(value = "select c.id, c.name, c.term, c.price, c.rating, c.count_of_reviews as countOfReviews," +
