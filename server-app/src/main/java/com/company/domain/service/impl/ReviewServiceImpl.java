@@ -83,9 +83,11 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    @Transactional
     public void updateReview(ReviewDto reviewDto) {
         var source = mapper.map(reviewDto, ReviewEntity.class);
         reviewRepository.save(source);
+        classService.updateClassAfterInsertReview(reviewDto.getClassId());
     }
 
     @Override
