@@ -27,6 +27,12 @@ mvn clean package
 docker-compose up
 ```
 
+### Login for admin
+```
+Admin
+flvbycthdth
+```
+
 The project is running and available at localhost:8080
 
 ### Swagger
